@@ -16,7 +16,8 @@
                 v-bind:counter="review.rcount"
                 v-bind:content="review.content"
                 v-bind:username="review.username"
-                v-bind:userrating="review.rating"
+                v-bind:userrating="review.userrating"
+                v-bind:siteid="review.site_id"
             ></short-review>
         </div>
     </main>

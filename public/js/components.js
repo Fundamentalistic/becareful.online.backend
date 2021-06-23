@@ -55,8 +55,14 @@ Vue.component('short-review', {
         content: String,
         username: String,
         userrating: Number,
+        siteid: Number
     },
-    template: "<div class=\"block row ml-2 mr-2 mt-2\" title=\"Читать отзыв целиком\">" +
+    methods: {
+        main: function(id) {
+            window.location = "/main/"+id;
+        }
+    },
+    template: "<div class=\"block row ml-2 mr-2 mt-2\" title=\"Читать отзыв целиком\" v-on:click=\"main(siteid)\">" +
         "            <div class=\"main-photo col-2 m-2\">" +
         "                <img v-bind:src=\"mainpagescreen\"/>" +
         "            </div>" +
