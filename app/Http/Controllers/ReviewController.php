@@ -16,7 +16,7 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $pagination = 30;
+    private $pagination = 10;
 
     public function index()
     {
@@ -25,6 +25,7 @@ class ReviewController extends Controller
             ->leftJoin('users', 'user_id', '=', 'users.id')
             ->leftJoin('reviews', 'sites.id', '=', 'site_id')
             ->paginate($this->pagination);
+
         $data = $data->toArray();
         return response($data)->header("Content-Type", "application/json");
     }

@@ -103,19 +103,19 @@ Vue.component('new-review-form', {
         sendNewReview: function(){
             console.log("sending start");
             let request = {
-                mainurl: this.mainurl,
+                url: this.mainurl,
                 images: this.images,
-                commonscore: this.commonscore,
+                rating: this.commonscore,
                 trustscore: this.trustscore,
                 convenience: this.convenience,
-                reviewheader: this.reviewheader,
+                header: this.reviewheader,
                 content: this.content
             };
             let self = this;
             this.error_text = "";
             window.localStorage.removeItem('images');
             window.localStorage.clear();
-            axios.post('https://becareful.online/new', JSON.stringify(request), {
+            axios.post('/new', request, {
                 'Content-Type': 'application/json',
             }).then(function(result){
                 console.log("OK");
@@ -157,8 +157,8 @@ Vue.component('new-review-form', {
         "      </svg>\n" +
         "\n" +
         "    </div>\n" +
-        "  <div class='row images' style='margin-left: 120px'>" +
-        "<img v-for='(image, index) in images' v-bind:src='image' style='max-width: 80px; max-height: 80px; padding-left: 10px;' v-on:click='showPhoto(index)'/>" +
+        "  <div class='row images d-flex justify-content-start' style='margin-left: 120px; max-height: 80px; min-width: 80%; overflow: hidden'>" +
+        "<img class='img-thumbnail align-left' style='max-height: 75px; max-width: 75px' v-for='(image, index) in images' v-bind:src='image' v-on:click='showPhoto(index)'/>" +
         "</div>" +
         "  </div>\n" +
         "  <hr class=\"divider\"/>\n" +

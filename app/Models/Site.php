@@ -15,7 +15,7 @@ class Site extends Model
     use HasFactory;
 
     protected $fillable = [
-        'url', 'rating', 'first_date', 'hash', 'mark', 'user_id'
+        'url', 'rating', 'first_date', 'hash', 'mark', 'user_id', 'main_page'
     ];
 
 }

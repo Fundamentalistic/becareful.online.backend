@@ -20,6 +20,16 @@ Route::get('/', function(){
     return view('index');
 });
 
+Route::get('/new', function(){
+    return view('newsite');
+});
+
+Route::get('/site', function(){
+    return view('main');
+});
+
+Route::get('/review/list', [\App\Http\Controllers\ReviewController::class, "index"]);
+
 Route::get('/site/{id}/detail', [\App\Http\Controllers\SiteController::class, "detail"]); // Сделать представление
 
 Route::post('/review/new', [\App\Http\Controllers\ReviewController::class, 'create']); // Сделать фронт
@@ -29,7 +39,7 @@ Route::post('/site/new', [\App\Http\Controllers\SiteController::class, 'create']
 
 Route::middleware('cors')->group(function(){
 
-    Route::post('/site/new', [\App\Http\Controllers\SiteController::class, 'create'])
+    Route::post('/new', [\App\Http\Controllers\SiteController::class, 'create'])
         ->name('site_creation_route');
 
     Route::get('/test', function(Request $request){

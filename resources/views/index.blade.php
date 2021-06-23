@@ -10,19 +10,18 @@
             <short-review
                 v-for="(review, index) in review_list" :key="index"
                 v-bind:key="index"
-                v-bind:mainpagescreen="review.main_image"
+                v-bind:mainpagescreen="review.main_page"
                 v-bind:mainlink="review.mainlink"
-                v-bind:commonscore="review.commonscore"
-                v-bind:counter="review.counter"
+                v-bind:commonscore="review.rating"
+                v-bind:counter="review.rcount"
                 v-bind:content="review.content"
                 v-bind:username="review.username"
-                v-bind:userrating="review.userrating"
+                v-bind:userrating="review.rating"
             ></short-review>
         </div>
     </main>
 @endsection
 
 @section('scripts')
-    <script src="js/components.js"></script>
     <script src="js/index.js"></script>
 @endsection
