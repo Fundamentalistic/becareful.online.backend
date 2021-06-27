@@ -59,7 +59,7 @@ Vue.component('short-review', {
     },
     methods: {
         main: function(id) {
-            window.location = "/main/"+id;
+            window.location = "/site/"+id+"/detail";
         }
     },
     template: "<div class=\"block row ml-2 mr-2 mt-2\" title=\"Читать отзыв целиком\" v-on:click=\"main(siteid)\">" +
@@ -116,3 +116,16 @@ Vue.component('short-review', {
         "            </div>" +
         "        </div>"
 });
+
+let dropdown_user_is_open = false;
+document.querySelector('.logo').onclick = () => { window.location = "/" };
+document.querySelector('.uinput').onclick = () => {
+
+    if(!dropdown_user_is_open){
+        document.querySelector('.dropdown-user-panel').style.display = "block";
+    }else{
+        document.querySelector('.dropdown-user-panel').style.display = "none";
+    }
+    dropdown_user_is_open = !dropdown_user_is_open;
+
+};

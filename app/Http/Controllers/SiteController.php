@@ -39,11 +39,42 @@ class SiteController extends Controller
 
     public function detail($site_id)
     {
-        $data = [];
-        $data['general'] = Site::find($site_id);
-        $data['screenshots'] = Screenshot::where('site_id', $site_id)->first();
-        $data['external'] = ExternalReview::where('site_id', $site_id)->first();
-        return view('detail', $data);
+        $data = Site::find($site_id);
+        if( $data != null ){
+            $data = $data->toArray();
+        }else{
+            return redirect('/');
+        }
+        $screenshots = Screenshot::firstWhere('site_id', $site_id);
+        if( $screenshots != null ){
+            $data['screenshots'] = explode(", ", $screenshots->links);
+        }
+
+        $selected = [
+            'reviews.id',
+            'reviews.header',
+            'reviews.created_at AS created_at',
+            'reviews.content',
+            'reviews.rating',
+            'reviews.status',
+            'users.name AS name',
+        ];
+        $data['reviews'] = Review::select($selected)->where('site_id', $site_id)
+            ->leftJoin("users", "reviews.user_id", "=", "users.id")
+            ->get();
+        if ($data['reviews'] !== null){
+            $data['reviews'] = $data['reviews']->toArray();
+        }
+
+        /*
+         * Заглушка для данных пользователя. Только на время разработки
+         */
+
+        for($i=0; $i<sizeof($data['reviews']); $i++){
+            $data['reviews'][$i]['name'] = "testname";
+        }
+
+        return view('main', $data);
     }
 
     public function create(Request $request){

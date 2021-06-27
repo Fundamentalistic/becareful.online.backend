@@ -4,7 +4,7 @@
     <main class="row d-flex justify-content-center">
         <div class="container col-md-8 search-block d-flex justify-content-center m-1">
             <input type="text" class="search col-6" name="search" placeholder="Поиск">
-            <img src="imgs/search2.png" alt="Найти" class="search-ico"/>
+            <img src="/imgs/search2.png" alt="Найти" class="search-ico"/>
         </div>
         <div id="currentReviewsContainer" class="new-reviews container col-md-8 m-1">
             <short-review
