@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Site;
 use App\Models\Screenshot;
 use App\Models\ExternalReview;
-use App\Models\Page;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class SiteController extends Controller
 {
@@ -66,23 +68,19 @@ class SiteController extends Controller
             $data['reviews'] = $data['reviews']->toArray();
         }
 
-        /*
-         * Заглушка для данных пользователя. Только на время разработки
-         */
-
-        for($i=0; $i<sizeof($data['reviews']); $i++){
-            $data['reviews'][$i]['name'] = "testname";
-        }
-
         return view('main', $data);
     }
 
     public function create(Request $request){
 
-        // Временная переменная введенная для удобства разработки.
-        // Заменить на получения идентификатора авторизованного пользователя
-        $user_id =  1;
+        // Получение идентификатора пользователя
+        try{
+            $user_id = Auth::user()->id;
+        }catch(Exception $e){
+            throw new AuthenticationException($e->getMessage());
+        }
 
+        // Заполнение модели сайта
         $site = new Site;
         $data = $request->toArray();
         $data['user_id'] = $user_id;
@@ -121,15 +119,5 @@ class SiteController extends Controller
         $review->fill($data);
         $review->save();
     }
-
-    public function append(Request $request){
-
-    }
-
-    public function external(Request $request){
-
-    }
-
-
 }
 

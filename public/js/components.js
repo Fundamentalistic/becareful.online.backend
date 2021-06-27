@@ -1,4 +1,28 @@
-Vue.component('rating', {
+let menu_object = {
+    props: ['text', 'link'],
+    template: "<a v-bind:href=\"link\">{{text}}</a>"
+};
+
+var header1 = Vue.createApp({
+    data(){
+        return {
+            title: "BECAREFUL - сайт о других сайтах. Отзывы и рейтинги. Будь в курсе того кому можно верить, а кому нет",
+            links: [],
+        }
+    },
+    mounted(){
+        console.log("header is created");
+        axios.get('/links').then((response) => {
+            console.log(response);
+            if  (response.status === 200){
+                console.log(this);
+                this.$data.links = response.data;
+            }
+        });
+    }
+});
+
+let rating_obj = {
     props: [
         'rating',
         'description'
@@ -35,97 +59,32 @@ Vue.component('rating', {
         setRating: function(val){
             console.log(val);
             this.ratingscore = val;
-            this.$emit('input', val, this)
+            this.$emit('input', val, this);
         }
     }
-});
+};
 
+header1.component('menu-link', menu_object);
 
-Vue.component('menu-link', {
-    props: ['text', 'link'],
-    template: "<a v-bind:href=\"link\">{{text}}</a>"
-});
-
-Vue.component('short-review', {
-    props: {
-        mainpagescreen: String,
-        mainlink: String,
-        commonscore: Number,
-        counter: Number,
-        content: String,
-        username: String,
-        userrating: Number,
-        siteid: Number
-    },
-    methods: {
-        main: function(id) {
-            window.location = "/site/"+id+"/detail";
-        }
-    },
-    template: "<div class=\"block row ml-2 mr-2 mt-2\" title=\"Читать отзыв целиком\" v-on:click=\"main(siteid)\">" +
-        "            <div class=\"main-photo col-2 m-2\">" +
-        "                <img v-bind:src=\"mainpagescreen\"/>" +
-        "            </div>" +
-        "            <div class=\"data col-1 mr-3\">" +
-        "                <a href=\"#\">{{mainlink}}</a>" +
-        "                <div class=\"rating\">" +
-        "                    <div class=\"empty\">" +
-        "                        <i class=\"rating-star\">☆</i>" +
-        "                        <i class=\"rating-star\">☆</i>" +
-        "                        <i class=\"rating-star\">☆</i>" +
-        "                        <i class=\"rating-star\">☆</i>" +
-        "                        <i class=\"rating-star\">☆</i>" +
-        "                    </div>" +
-        "                    <div class=\"fill\" v-bind:style=\"'width:'+commonscore+'px; height: 20px'\"><!--Ширина используется для управления строкой рейтинга-->" +
-        "                        <i class=\"rating-star-fill\">★</i>" +
-        "                        <i class=\"rating-star-fill\">★</i>" +
-        "                        <i class=\"rating-star-fill\">★</i>" +
-        "                        <i class=\"rating-star-fill\">★</i>" +
-        "                        <i class=\"rating-star-fill\">★</i>" +
-        "                    </div>" +
-        "                </div>" +
-        "                <div class=\"messages row\">" +
-        "                    <img src=\"imgs/chat.png\">" +
-        "                    <div class=\"message-count\">{{counter}}</div>" +
-        "                </div>" +
-        "            </div>" +
-        "" +
-        "            <div class=\"content col-9 m-1\">{{content}}" +
-        "                <div class=\"white-block\"></div>" +
-        "                <div class=\"user-data row\">" +
-        "                    <div class=\"username\">{{username}}</div>" +
-        "                    <div class=\"userrating\">" +
-        "                        <div class=\"rating ml-2\">" +
-        "                            <div class=\"empty\">" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                            </div>" +
-        "                            <div class=\"fill\" v-bind:style=\"'width: '+userrating+'px; max-height: 20px'\"><!--Ширина используется для управления строкой рейтинга-->" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                            </div>" +
-        "                        </div>" +
-        "                    </div>" +
-        "                </div>" +
-        "            </div>" +
-        "        </div>"
-});
+header1.mount('#header_menu');
 
 let dropdown_user_is_open = false;
 document.querySelector('.logo').onclick = () => { window.location = "/" };
-document.querySelector('.uinput').onclick = () => {
+document.querySelector('.uinput').onclick = (event) => {
+
+    console.log(event);
 
     if(!dropdown_user_is_open){
         document.querySelector('.dropdown-user-panel').style.display = "block";
+        document.querySelector('.dropdown-user-panel').style.left = event.x + "px";
+        document.querySelector('.dropdown-user-panel').style.top = event.y + "px";
     }else{
         document.querySelector('.dropdown-user-panel').style.display = "none";
     }
     dropdown_user_is_open = !dropdown_user_is_open;
 
 };
+
+document.querySelector('.dropdown-user-panel').addEventListener("onmouseleave", () => {
+    document.querySelector('.dropdown-user-panel').style.display = "none";
+});

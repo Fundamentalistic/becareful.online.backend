@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
@@ -12,11 +12,11 @@
 
 </head>
 <body class="container-fluid">
-<header id="header" class="row">
+<header id="header_menu" class="row">
     <div class="logo col-md-2"><img src="/imgs/logo.png" alt="SiteRating" class="logo"></div>
     <div class="menu col-md-8 d-none d-md-block">
         <div class="main-menu row d-flex justify-content-center">
-            <menu-link v-for="l in links" v-bind:link="l.link" v-bind:text="l.text"></menu-link>
+            <menu-link v-for="l in links" v-bind:link="l.link" v-bind:text="l.name"></menu-link>
         </div>
     </div>
     @auth
@@ -35,7 +35,7 @@
 </header>
     @yield('content')
 <footer>
-    <script type="module" src="/js/components.js"></script>
+    <script src="/js/components.js"></script>
     @yield('scripts')
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

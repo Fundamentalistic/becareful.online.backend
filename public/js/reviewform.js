@@ -1,5 +1,14 @@
-Vue.component('new-review-form', {
-    data: function(){
+var form = Vue.createApp({
+    el: "main",
+    data(){
+        return{
+            reviews: []
+        }
+    }
+});
+
+form.component('new-review-form', {
+    data(){
         return {
             mainurl: "",
             images: [],
@@ -8,7 +17,8 @@ Vue.component('new-review-form', {
             convenience: 0,
             reviewheader: "",
             content: "",
-            error_text: ""
+            error_text: "",
+            result_text: "",
         }
     },
     watch: {
@@ -120,6 +130,10 @@ Vue.component('new-review-form', {
             }).then(function(result){
                 console.log("OK");
                 console.log(result);
+                self.result_text = "Вы только что создали новый сайт"
+                setTimeout(() => {
+                    self.result_text = "";
+                }, 2000);
             }).catch(function(error){
                 console.log("ERROR");
                 self.error_text = error;
@@ -180,14 +194,11 @@ Vue.component('new-review-form', {
         "    <input id=\"hidedFileInput\" type=\"file\" name=\"secondary-images\" class=\"secondary-images\" multiple v-on:change=\"fileListUpdate()\">\n" +
         "<div class='background-plane' id='photoSlider' v-on:click='hideSlider()'></div>" +
         "<img src='' class='sliderComponent'/>" +
+        "<div style='color: green'>{{result_text}}</div>" +
         "<div style='color: red'>{{error_text}}</div>" +
         "  </form>"
-})
-
-
-var form = new Vue({
-    el: "main",
-    data: {
-        reviews: []
-    }
 });
+
+form.component('rating', rating_obj);
+
+form.mount('main');

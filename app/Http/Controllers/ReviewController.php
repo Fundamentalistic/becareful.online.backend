@@ -24,6 +24,7 @@ class ReviewController extends Controller
             ->select('*')
             ->leftJoin('users', 'user_id', '=', 'users.id')
             ->leftJoin('reviews', 'sites.id', '=', 'site_id')
+            ->orderBy('reviews.id', 'DESC')
             ->paginate($this->pagination);
 
         $data = $data->toArray();
@@ -43,9 +44,16 @@ class ReviewController extends Controller
     }
 
     public function search(Request $request){
-        $query = $request->query;
-        $results = Site::where('url', 'like', $query)->hasMany(Review::class, 'site_id')->get();
-        return response($results)->header('Content-Type', 'application/json');
+        $query = $request->search;
+        $data = DB::table('sites')
+            ->select('*')
+            ->leftJoin('users', 'user_id', '=', 'users.id')
+            ->leftJoin('reviews', 'sites.id', '=', 'site_id')
+            ->where('sites.url', 'like', '%'.$query.'%')
+            ->paginate($this->pagination);
+
+        $data = $data->toArray();
+        return response($data)->header('Content-Type', 'application/json');
     }
 
     /**

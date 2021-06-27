@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Site;
+use App\Models\Page;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::get('/site', function(){
 });
 
 Route::get('/review/list', [\App\Http\Controllers\ReviewController::class, "index"]);
+Route::get('/review/search', [\App\Http\Controllers\ReviewController::class, "search"]);
 
 Route::get('/site/{id}/detail', [\App\Http\Controllers\SiteController::class, "detail"]); // Сделать представление
 
@@ -39,6 +41,8 @@ Route::post('/site/new', [\App\Http\Controllers\SiteController::class, 'create']
 
 Route::middleware('cors')->group(function(){
 
+    Route::get('/links', [App\Http\Controllers\PageController::class, 'links']);
+
     Route::post('/new', [\App\Http\Controllers\SiteController::class, 'create'])
         ->name('site_creation_route');
 
@@ -47,6 +51,8 @@ Route::middleware('cors')->group(function(){
     });
 });
 
+Route::get('/page/{page}', [\App\Http\Controllers\PageController::class, 'page']);
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
