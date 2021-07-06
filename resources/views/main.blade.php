@@ -101,8 +101,31 @@
                 <textarea class="col-4 review-form-content" name="content"></textarea>
             </div>
             <div class="row d-flex justify-content-center mt-5">
+                <div v-on:click='openFileManager()' class="append-image-btn" style="margin-right: 170px; margin-top: -20px;" title="Фотографии сайта">
+                    <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d)">
+                            <rect x="4" width="70" height="70" rx="8" fill="white"/>
+                            <rect x="4.5" y="0.5" width="69" height="69" rx="7.5" stroke="black"/>
+                        </g>
+                        <line x1="40" y1="15" x2="40" y2="55" stroke="black" stroke-width="2"/>
+                        <line x1="19" y1="34" x2="59" y2="34" stroke="black" stroke-width="2"/>
+                        <defs>
+                            <filter id="filter0_d" x="0" y="0" width="78" height="78" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                                <feOffset dy="4"/>
+                                <feGaussianBlur stdDeviation="2"/>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            </filter>
+                        </defs>
+                    </svg>
+
+                </div>
                 <input type="submit" class="btn-primary" value="Отправить"/>
             </div>
+            <input id="hidedFileInput" type="file" name="secondary-images" class="secondary-images" multiple v-on:change="fileListUpdate()">
         </div>
     </form>
 </main>

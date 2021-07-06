@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', [\App\Http\Controllers\ReviewController::class, 'index']);
 Route::get('/', function(){
@@ -22,6 +22,9 @@ Route::get('/', function(){
 });
 
 Route::get('/new', function(){
+    if(!Auth::user()){
+        return redirect('/login');
+    }
     return view('newsite');
 });
 

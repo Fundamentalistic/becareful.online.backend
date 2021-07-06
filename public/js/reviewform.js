@@ -19,12 +19,19 @@ form.component('new-review-form', {
             content: "",
             error_text: "",
             result_text: "",
+            errors: {
+                emptyMain: false,
+                emptyImages: false,
+                emptyReviewHeader: false,
+                emptyContent: false,
+            }
         }
     },
     watch: {
         'mainurl': function(nval, oval){
             console.log(nval, oval);
             window.localStorage.setItem('mainurl', nval);
+            this.errors.emptyMain = false;
         },
         'commonscore': function(nval, oval){
             console.log(nval, oval);
@@ -41,10 +48,12 @@ form.component('new-review-form', {
         'reviewheader': function(nval, oval){
             console.log(nval, oval);
             window.localStorage.setItem('reviewheader', nval);
+            this.errors.emptyReviewHeader = false;
         },
         'content': function(nval, oval){
             console.log(nval, oval);
             window.localStorage.setItem('content', nval);
+            this.errors.emptyContent = false;
         },
     },
     created: function(){
@@ -55,7 +64,6 @@ form.component('new-review-form', {
         let local_storage_convenience = window.localStorage.getItem('convenience');
         let local_storage_reviewheader = window.localStorage.getItem('reviewheader');
         let local_storage_content = window.localStorage.getItem('content');
-        console.log(local_storage_mainurl);
         if ( imgss != null){
             this.images = imgss.split('|||');
         }
@@ -92,9 +100,11 @@ form.component('new-review-form', {
             let files = document.querySelector('#hidedFileInput').files;
             //Append image checking
             for( let a = 0; a < files.length; a++ ){
-                toBase64(files[a]);
-                console.log(this.images)
+                toBase64(files[a]).then(() => {
+                    console.log(this.images);
+                });
             }
+            this.errors.emptyImages = false;
         },
         openFileManager: function(){
             document.querySelector('#hidedFileInput').click();
@@ -112,6 +122,33 @@ form.component('new-review-form', {
         },
         sendNewReview: function(){
             console.log("sending start");
+            console.log(this);
+            if(this.mainurl === ""){
+                this.errors.emptyMain = true;
+            }else{
+                this.errors.emptyMain = false;
+            }
+            console.log(this.images);
+            this.errors.emptyImages = (this.images.length === 0);
+
+            if(this.reviewheader === ""){
+                this.errors.emptyReviewHeader = true;
+            }else{
+                this.errors.emptyReviewHeader = false;
+            }
+            if(this.content === ""){
+                this.errors.emptyContent = true;
+            }else{
+                this.errors.emptyContent = false;
+            }
+            if(
+                this.errors.emptyMain ||
+                this.errors.emptyImages ||
+                this.errors.emptyReviewHeader ||
+                this.errors.emptyContent
+            ){
+                return;
+            }
             let request = {
                 url: this.mainurl,
                 images: this.images,
@@ -140,58 +177,62 @@ form.component('new-review-form', {
             });
         }
     },
-    template: "<form style='max-width: 800px; margin-left: auto; margin-right: auto; position: relative;'>\n" +
-        "  <div class=\"row d-flex justify-content-center py-5\"><h2>Добавление нового сайта</h2></div>\n" +
-        "  <div class=\"form-group\">\n" +
-        "    <label for=\"urlpath\">Адрес сайта</label>\n" +
-        "    <input type=\"text\" id=\"urlpath\" name=\"urlpath\" v-model=\"mainurl\" value=\"\" class=\"form-control col-6\" placeholder=\"www.url.ru\">\n" +
-        "  </div>\n" +
-        "  <hr class=\"divider\"/>\n" +
-        "  <h5 for=\"photos\">Фотографии сайта</h5>\n" +
-        "  <div id=\"photoBtn\" class=\"form-group row py-3\" style=\"height: 100px;\">\n" +
-        "    <div v-on:click='openFileManager()' class=\"append-image-btn\" style=\"position: absolute; left: 1.5%;\" title=\"Фотографии сайта\">\n" +
-        "      <svg width=\"78\" height=\"78\" viewBox=\"0 0 78 78\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-        "        <g filter=\"url(#filter0_d)\">\n" +
-        "          <rect x=\"4\" width=\"70\" height=\"70\" rx=\"8\" fill=\"white\"/>\n" +
-        "          <rect x=\"4.5\" y=\"0.5\" width=\"69\" height=\"69\" rx=\"7.5\" stroke=\"black\"/>\n" +
-        "        </g>\n" +
-        "        <line x1=\"40\" y1=\"15\" x2=\"40\" y2=\"55\" stroke=\"black\" stroke-width=\"2\"/>\n" +
-        "        <line x1=\"19\" y1=\"34\" x2=\"59\" y2=\"34\" stroke=\"black\" stroke-width=\"2\"/>\n" +
-        "        <defs>\n" +
-        "          <filter id=\"filter0_d\" x=\"0\" y=\"0\" width=\"78\" height=\"78\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\n" +
-        "            <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\n" +
-        "            <feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\"/>\n" +
-        "            <feOffset dy=\"4\"/>\n" +
-        "            <feGaussianBlur stdDeviation=\"2\"/>\n" +
-        "            <feColorMatrix type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0\"/>\n" +
-        "            <feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow\"/>\n" +
-        "            <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow\" result=\"shape\"/>\n" +
-        "          </filter>\n" +
-        "        </defs>\n" +
-        "      </svg>\n" +
-        "\n" +
-        "    </div>\n" +
+    template: "<form style='max-width: 800px; margin-left: auto; margin-right: auto; position: relative;'>" +
+        "  <div class=\"row d-flex justify-content-center py-5\"><h2>Добавление нового сайта</h2></div>" +
+        "  <div class=\"form-group\">" +
+        "    <label v-if=\"!errors.emptyMain\" for=\"urlpath\">Адрес сайта</label>" +
+        "    <label v-if=\"errors.emptyMain\" style=\"color: red\" for=\"urlpath\">Адрес сайта не может быть пустым</label>" +
+        "    <input type=\"text\" id=\"urlpath\" name=\"urlpath\" v-model=\"mainurl\" value=\"\" class=\"form-control col-6\" :class=\"{'alert-state': errors.emptyMain}\" placeholder=\"www.url.ru\">" +
+        "  </div>" +
+        "  <hr class=\"divider\"/>" +
+        "  <h5 for=\"photos\">Фотографии сайта</h5>" +
+        "  <div id=\"photoBtn\" class=\"form-group row py-3\" style=\"height: 100px;\">" +
+        "   <h3 v-if=\"errors.emptyImages\" class=\"alert\">Сайт не может быть создан без фотографий</h3>" +
+        "    <div v-on:click='openFileManager()' class=\"append-image-btn\" style=\"position: absolute; left: 1.5%;\" title=\"Фотографии сайта\">" +
+        "      <svg width=\"78\" height=\"78\" viewBox=\"0 0 78 78\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">" +
+        "        <g filter=\"url(#filter0_d)\">" +
+        "          <rect x=\"4\" width=\"70\" height=\"70\" rx=\"8\" fill=\"white\"/>" +
+        "          <rect x=\"4.5\" y=\"0.5\" width=\"69\" height=\"69\" rx=\"7.5\" stroke=\"black\"/>" +
+        "        </g>" +
+        "        <line x1=\"40\" y1=\"15\" x2=\"40\" y2=\"55\" stroke=\"black\" stroke-width=\"2\"/>" +
+        "        <line x1=\"19\" y1=\"34\" x2=\"59\" y2=\"34\" stroke=\"black\" stroke-width=\"2\"/>" +
+        "        <defs>" +
+        "          <filter id=\"filter0_d\" x=\"0\" y=\"0\" width=\"78\" height=\"78\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">" +
+        "            <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>" +
+        "            <feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\"/>" +
+        "            <feOffset dy=\"4\"/>" +
+        "            <feGaussianBlur stdDeviation=\"2\"/>" +
+        "            <feColorMatrix type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0\"/>" +
+        "            <feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow\"/>" +
+        "            <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow\" result=\"shape\"/>" +
+        "          </filter>" +
+        "        </defs>" +
+        "      </svg>" +
+        "" +
+        "    </div>" +
         "  <div class='row images d-flex justify-content-start' style='margin-left: 120px; max-height: 80px; min-width: 80%; overflow: hidden'>" +
         "<img class='img-thumbnail align-left' style='max-height: 75px; max-width: 75px' v-for='(image, index) in images' v-bind:src='image' v-on:click='showPhoto(index)'/>" +
         "</div>" +
-        "  </div>\n" +
-        "  <hr class=\"divider\"/>\n" +
+        "  </div>" +
+        "  <hr class=\"divider\"/>" +
         "<rating v-bind:rating='commonscore' description='Общая оценка'></rating>"+
         "<rating v-bind:rating='trustscore' description='Индекс доверия'></rating>"+
         "<rating v-bind:rating='convenience' description='Удобство'></rating>"+
-        "</div>\n" +
-        "  <div class=\"form-group pt-4\">\n" +
-        "    <label for=\"review-header\">Заголовок отзыва</label>\n" +
-        "    <input type=\"text\" id=\"review-header\" name=\"review-header\" value=\"\" class=\"form-control col-6\" placeholder=\"Заголовок\" v-model='reviewheader'>\n" +
-        "  </div>\n" +
-        "  <div class=\"form-group pt-3\">\n" +
-        "    <label for=\"content\">Текст отзыва</label>\n" +
-        "    <textarea id=\"content\" name=\"content\" class=\"form-control col-12\" v-model='content' style='min-height: 400px'></textarea>\n" +
-        "  </div>\n" +
-        "  <div class=\"row\">\n" +
-        "    <input type=\"button\" class=\"form-btn absolute-right btn-primary\" value=\"Отправить\" style=\"position: absolute; right: 1.5%;\" v-on:click='sendNewReview()'>\n" +
-        "  </div>\n" +
-        "    <input id=\"hidedFileInput\" type=\"file\" name=\"secondary-images\" class=\"secondary-images\" multiple v-on:change=\"fileListUpdate()\">\n" +
+        "</div>" +
+        "  <div class=\"form-group pt-4\">" +
+        "    <label v-if='!errors.emptyReviewHeader' for=\"review-header\">Заголовок отзыва</label>" +
+        "    <label v-if='errors.emptyReviewHeader' for=\"review-header\" style='color: red'>Заголовок отзыва не может быть пустым</label>" +
+        "    <input type=\"text\" id=\"review-header\" name=\"review-header\" value=\"\" :class=\"{'alert-state': errors.emptyReviewHeader}\" class=\"form-control col-6\" placeholder=\"Заголовок\" v-model='reviewheader'>" +
+        "  </div>" +
+        "  <div class=\"form-group pt-3\">" +
+        "    <label v-if='!errors.emptyContent'  for=\"content\">Текст отзыва</label>" +
+        "    <label v-if='errors.emptyContent' style='color: red' for=\"content\">Текст отзыва не может быть пустым</label>" +
+        "    <textarea id=\"content\" name=\"content\" :class=\"{'alert-state': errors.emptyContent}\" class=\"form-control col-12\" v-model='content' style='min-height: 400px'></textarea>" +
+        "  </div>" +
+        "  <div class=\"row\">" +
+        "    <input type=\"button\" class=\"form-btn absolute-right btn-primary\" value=\"Отправить\" style=\"position: absolute; right: 1.5%;\" v-on:click='sendNewReview()'>" +
+        "  </div>" +
+        "    <input id=\"hidedFileInput\" type=\"file\" name=\"secondary-images\" class=\"secondary-images\" multiple v-on:change=\"fileListUpdate()\">" +
         "<div class='background-plane' id='photoSlider' v-on:click='hideSlider()'></div>" +
         "<img src='' class='sliderComponent'/>" +
         "<div style='color: green'>{{result_text}}</div>" +

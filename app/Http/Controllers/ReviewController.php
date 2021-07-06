@@ -23,7 +23,7 @@ class ReviewController extends Controller
         $data = DB::table('sites')
             ->select('*')
             ->leftJoin('users', 'user_id', '=', 'users.id')
-            ->leftJoin('reviews', 'sites.id', '=', 'site_id')
+            ->rightJoin('reviews', 'sites.id', '=', 'site_id')
             ->orderBy('reviews.id', 'DESC')
             ->paginate($this->pagination);
 

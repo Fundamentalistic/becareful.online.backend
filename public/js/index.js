@@ -2,7 +2,10 @@ var reviews = Vue.createApp({
     data() {
         return {
             review_list: [],
-            page: 1
+            first_page_url: "",
+            last_page_url: "",
+            next_page_url: "",
+            current_page_url: "",
         }
     },
     mounted() {
@@ -11,23 +14,32 @@ var reviews = Vue.createApp({
         axios.get("/review/list")
             .then(function(response){
                 console.log(response);
-                self.last_page_url = response.data.last_page_url;
                 self.review_list = response.data.data;
+                self.first_page_url = response.data.first_page_url;
+                self.last_page_url = response.data.last_page_url;
+                self.next_page_url = response.data.next_page_url;
+                self.current_page += 1;
             });
-        window.addEventListener('scroll', function(){
-            console.log(reviews.page);
+        window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight-50) {
-                let url = "/review/list?page="+reviews.page;
-                console.log(reviews.last_page_url, reviews.last_page_url.indexOf(url) != -1);
-                if( reviews.last_page_url.indexOf(url) != -1 ){
+                //console.log(this.review_list);
+                //console.log("this.review_list.last_page_url, this.review_list.last_page_url.indexOf(url) != -1");
+                if( this.current_page_url === this.next_page_url ){
                     return;
+                }else{
+                    self.current_page_url = self.next_page_url;
+                    console.log(self.next_page_url);
+                    if(self.next_page_url !== null){
+                        axios.get(self.next_page_url)
+                            .then(function(response){
+                                console.log(response);
+                                self.review_list = self.review_list.concat(response.data.data);
+                                self.first_page_url = response.data.first_page_url;
+                                self.last_page_url = response.data.last_page_url;
+                                self.next_page_url = response.data.next_page_url;
+                            });
+                    }
                 }
-                reviews.page += 1;
-                axios.get(url)
-                    .then(function(response){
-                        console.log(self.review_list);
-                        self.review_list = self.review_list.concat(response.data.data);
-                    });
             }
         });
         let search = document.querySelector('#search');

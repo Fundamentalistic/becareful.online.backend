@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Site;
 use App\Models\Screenshot;
 use App\Models\ExternalReview;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use Illuminate\Auth\AuthenticationException;
@@ -91,8 +92,8 @@ class SiteController extends Controller
         $data['site_id'] = $this->getNextId();
 
         $screenshot_links = [];
-
-        foreach($data['images'] as $image){
+        $main_image_path = "";
+        foreach($data['images'] as $key => $image){
             $sp = explode(";base64,", $image);
             $type = explode(":image/", $sp[0])[1];
             $base64content = $sp[1];
@@ -101,10 +102,33 @@ class SiteController extends Controller
             $filePath = "public/screenshots/" . $data['site_id'] . "/" . $filename . "." . $type;
             Storage::put($filePath, $image_byte_array);
             $url = Storage::url($filePath);
+            if($key === 0){
+                $main_image_path = $filePath;
+            }
             array_push($screenshot_links, $url);
         }
 
-        $data['main_page'] = $screenshot_links[0];
+        // Выполняем сжатие первого изображения для быстрого отображения сайта в новых отзывах
+
+        $sp = explode(".", $main_image_path);
+        $extension = end($sp);
+        $destination_img = str_replace($extension, "compress.".$extension, $main_image_path);
+        $this->compress(Storage::path($main_image_path), Storage::path($destination_img), 5);
+
+        $percent = 0.01;
+        list($width, $height) = getimagesize(Storage::path($main_image_path));
+        $newwidth = $width * $percent;
+        $newheight = $height * $percent;
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+        $source = imagecreatefromjpeg(Storage::path($destination_img));
+
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+        imagejpeg($thumb, Storage::path($destination_img));
+
+        $data['main_page'] = Storage::url($destination_img);
+
+        // Завершение сжатия изображение присваиванием значения переменной main_page
+
         $site->fill($data);
         $site->save();
 
@@ -118,6 +142,22 @@ class SiteController extends Controller
         $review = new Review;
         $review->fill($data);
         $review->save();
+    }
+
+    private function compress($source, $destination, $quality){
+
+        $info = getimagesize($source);
+
+        if($info['mime'] == 'image/jpeg'){
+            $image = imagecreatefromjpeg($source);
+        }else if($info['mime'] == 'image/gif'){
+            $image = imagecreatefromgif($source);
+        }else if($info['mime'] == 'image/png'){
+            $image = imagecreatefrompng($source);
+        }else{
+            throw new InvalidArgumentException("Unknown mime type in compress method");
+        }
+        imagejpeg($image, $destination, $quality);
     }
 }
 

@@ -6,8 +6,16 @@
   overflow: hidden;
   height: 450px; }
 
+.alert-state {
+  border-color: red !important; }
+
 .carousel {
   width: 100% !important; }
+
+h3.alert {
+  color: red;
+  font-size: 14px;
+  margin-left: 100px; }
 
 #shortReviewForm {
   display: none;
@@ -57,7 +65,7 @@ body header {
   min-height: 50px;
   font-size: 15px; }
   body header a:visited {
-    color: #bbb; }
+    color: #fff; }
   body header .main-menu {
     min-height: 100%; }
     body header .main-menu a {
@@ -92,15 +100,21 @@ body main .rating {
   body main .rating .empty {
     position: absolute;
     min-width: 100px;
-    cursor: pointer; }
+    cursor: pointer;
+    margin-top: -5px !important;
+    margin-left: 10px !important; }
     body main .rating .empty .rating-star {
-      color: #dbdb19; }
+      color: #dbdb19;
+      font-size: 23px;
+      font-weight: bold; }
   body main .rating .fill {
     cursor: pointer;
     width: 50px;
     overflow: hidden;
     color: #DBDB19;
-    height: 20px; }
+    height: 40px; }
+    body main .rating .fill .rating-star-fill {
+      font-size: 23px; }
 body main .search-ico {
   max-width: 25px;
   max-height: 25px;
@@ -131,6 +145,9 @@ body main .new-reviews {
       font-size: 14px;
       max-height: 85px;
       overflow: hidden; }
+      @media (max-width: 1743px) {
+        body main .new-reviews .block .content {
+          min-width: 100% !important; } }
     body main .new-reviews .block .main-photo {
       max-height: 100px;
       max-width: 100px; }
@@ -143,12 +160,15 @@ body main .new-reviews {
       right: 0;
       bottom: 0;
       background: #fff;
-      background: linear-gradient(270deg, white 0%, white 80%, rgba(255, 255, 255, 0) 100%); }
+      background: linear-gradient(270deg, white 0%, white 80%, rgba(255, 255, 255, 0) 100%);
+      margin-right: 10px; }
     body main .new-reviews .block .user-data {
       position: absolute;
       right: 110px;
       bottom: 0;
       font-style: italic; }
+    body main .new-reviews .block .data {
+      width: 150px; }
 
 .main-border {
   position: relative;
@@ -303,7 +323,7 @@ input[type="file"] {
   z-index: 1020; }
 
 main {
-  background-color: rgba(240, 240, 240, 0.1); }
+  background: rgba(0, 0, 0, 0.017); }
 
 .carousel-control-next:hover, .carousel-control-prev:hover {
   background-color: rgba(0, 0, 0, 0.05); }

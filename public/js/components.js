@@ -31,25 +31,27 @@ let rating_obj = {
         console.log('rating was created', this.rating);
         this.ratingscore = this.rating;
     },
-    template: "<div class=\"form-group row pt-5\">\n" +
-        "    <label for=\"score\" class=\"col-2\">{{description}}</label>\n" +
-        "    <div id=\"score\" class=\"rating col-2\">\n" +
-        "      <div class=\"empty\">\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(20)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(40)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(60)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(80)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(100)'>☆</i>\n" +
-        "      </div>\n" +
-        "      <div class=\"fill\" v-bind:style=\"'height; 20px; width: '+ratingscore+'px;'\"><!--Ширина используется для управления строкой рейтинга-->\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "      </div>\n" +
-        "    </div>\n" +
-        "  </div>\n",
+    template: `<div class="form-group row pt-5">
+                  <label for="score" class="col-2">{{description}}</label>
+                        <div id="score" class="rating col-2">
+                            <div class="empty">
+                                <i class="rating-star" v-on:click='setRating(40)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(60)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(80)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(100)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(120)'>☆</i>
+                            </div>
+
+                            <!--Ширина используется для управления строкой рейтинга-->
+                            <div class="fill" v-bind:style="'height; 40px; width: '+ratingscore+'px;'">
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                            </div>
+                        </div>
+                </div>`,
     data: function(){
         return {
             ratingscore: 0,

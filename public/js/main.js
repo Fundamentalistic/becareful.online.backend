@@ -7,10 +7,31 @@ var main = Vue.createApp({
 	},
 	data(){
 		return {
-		    site_id: 0
+		    site_id: 0,
+            errors: {
+                emptyMain: false,
+                emptyImages: false,
+                emptyReviewHeader: false,
+                emptyContent: false,
+            }
+
         }
 	},
 	methods: {
+        openFileManager: function(){
+            document.querySelector('#hidedFileInput').click();
+        },
+        showPhoto: function(el){
+            console.log(el);
+            document.querySelector('.background-plane').style.display = "block";
+            document.querySelector('.sliderComponent').src = this.images[el];
+            document.querySelector('.sliderComponent').style.display = "block";
+        },
+        hideSlider: function(){
+            document.querySelector('.background-plane').style.display = "none";
+            document.querySelector('.sliderComponent').src = '';
+            document.querySelector('.sliderComponent').style.display = "none";
+        },
 		openShortReviewForm: () => {
 			console.log('shortReviewForm is open');
 			let form = document.querySelector('#shortReviewForm');
@@ -19,7 +40,25 @@ var main = Vue.createApp({
 		hideShortReviewForm: () => {
 			let form = document.querySelector('#shortReviewForm');
 			form.style.display = "none";
-		}
+		},
+        fileListUpdate: function(){
+            console.log("file update");
+            let self = this;
+            const toBase64 = file => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => { this.images.push(reader.result); window.localStorage.setItem('images', this.images.join("|||")) };
+                reader.onerror = error => reject(error);
+            });
+            let files = document.querySelector('#hidedFileInput').files;
+            //Append image checking
+            for( let a = 0; a < files.length; a++ ){
+                toBase64(files[a]).then(() => {
+                    console.log(this.images);
+                });
+            }
+            this.errors.emptyImages = false;
+        },
 	}
 
 });
@@ -32,25 +71,27 @@ main.component('rating', {
         console.log('rating was created', this.rating);
         this.ratingscore = this.rating;
     },
-    template: "  <div class=\"form-group row pt-5\">\n" +
-        "    <label for=\"score\" class=\"col-3\">{{description}}</label>\n" +
-        "    <div id=\"score\" class=\"rating col-4\">\n" +
-        "      <div class=\"empty\">\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(20)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(40)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(60)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(80)'>☆</i>\n" +
-        "        <i class=\"rating-star\" v-on:click='setRating(100)'>☆</i>\n" +
-        "      </div>\n" +
-        "      <div class=\"fill\" v-bind:style=\"'height; 20px; width: '+ratingscore+'px;'\"><!--Ширина используется для управления строкой рейтинга-->\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "        <i class=\"rating-star-fill\">★</i>\n" +
-        "      </div>\n" +
-        "    </div>\n" +
-        "  </div>\n",
+    template: `<div class="form-group row pt-5">
+                  <label for="score" class="col-2">{{description}}</label>
+                        <div id="score" class="rating col-2">
+                            <div class="empty">
+                                <i class="rating-star" v-on:click='setRating(40)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(60)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(80)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(100)'>☆</i>
+                                <i class="rating-star" v-on:click='setRating(120)'>☆</i>
+                            </div>
+
+                            <!--Ширина используется для управления строкой рейтинга-->
+                            <div class="fill" v-bind:style="'height; 40px; width: '+ratingscore+'px;'">
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                                <i class="rating-star-fill">★</i>
+                            </div>
+                        </div>
+                </div>`,
     data(){
         return {
             ratingscore: 0,
