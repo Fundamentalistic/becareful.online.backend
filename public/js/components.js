@@ -35,11 +35,11 @@ let rating_obj = {
                   <label for="score" class="col-2">{{description}}</label>
                         <div id="score" class="rating col-2">
                             <div class="empty">
+                                <i class="rating-star" v-on:click='setRating(20)'>☆</i>
                                 <i class="rating-star" v-on:click='setRating(40)'>☆</i>
                                 <i class="rating-star" v-on:click='setRating(60)'>☆</i>
                                 <i class="rating-star" v-on:click='setRating(80)'>☆</i>
                                 <i class="rating-star" v-on:click='setRating(100)'>☆</i>
-                                <i class="rating-star" v-on:click='setRating(120)'>☆</i>
                             </div>
 
                             <!--Ширина используется для управления строкой рейтинга-->

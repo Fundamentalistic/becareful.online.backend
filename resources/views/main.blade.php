@@ -85,22 +85,28 @@
                 <div class="date">{{$review['created_at']}}</div>
             </div>
         @endforeach
-    <form method="POST" :action="'/new/review?site_id='+{{$id}}" id="shortReviewForm">
+    <!--<form method="POST" :action="'/new/review?site_id='+{{$id}}" id="shortReviewForm">-->
+    <div id="shortReviewForm">
         <div class="background" v-on:click="hideShortReviewForm"></div>
         <div class="reviewPane" class="container">
             <div class="row d-flex justify-content-center mt-5">
                 <h3>Оставить отзыв</h3>
             </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <rating class="col-4" description="Оценка" rating="0"></rating>
+            <div class="row d-flex justify-content-start mt-5">
+                <rating v-bind:rating="commonscore" class="col-12" description="Оценка" rating="0"></rating>
             </div>
             <div class="row d-flex justify-content-center mt-5">
-                <input class="col-4 review-form-header" name="header" type="text" placeholder="Заголовок"/>
+                <input class="col-12 review-form-header" v-model="header" :class="{ 'alert-state': errors.emptyReviewHeader }" name="header" type="text" placeholder="Заголовок"/>
             </div>
             <div class="row d-flex justify-content-center mt-5">
-                <textarea class="col-4 review-form-content" name="content"></textarea>
+                <textarea v-model="content" class="col-12 review-form-content" :class="{ 'alert-state': errors.emptyContent }" name="content"></textarea>
             </div>
-            <div class="row d-flex justify-content-center mt-5">
+            <div class="row d-flex justify-content-start mt-5" style="min-height: 80px">
+                <div class='row images d-flex justify-content-start' style='margin-left: 120px; max-height: 80px; min-width: 80%; overflow: hidden'>
+                    <img class='img-thumbnail align-left' style='max-height: 75px; max-width: 75px' v-for='(image, index) in images' v-bind:src='image' v-on:click='showPhoto(index)'/>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-around mt-5">
                 <div v-on:click='openFileManager()' class="append-image-btn" style="margin-right: 170px; margin-top: -20px;" title="Фотографии сайта">
                     <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d)">
@@ -123,11 +129,11 @@
                     </svg>
 
                 </div>
-                <input type="submit" class="btn-primary" value="Отправить"/>
+                <input type="submit" class="btn-primary" @click="sendNewReview()" value="Отправить"/>
             </div>
             <input id="hidedFileInput" type="file" name="secondary-images" class="secondary-images" multiple v-on:change="fileListUpdate()">
         </div>
-    </form>
+    </div>
 </main>
 @endsection
 @section('scripts')

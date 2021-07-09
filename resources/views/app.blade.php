@@ -23,9 +23,7 @@
         <div class="uinput col-md-1 d-none d-md-block">{{Auth::user()->name}}</div>
         <div class="dropdown-user-panel" style="display: none">
             <ul>
-                <li>Мои отзывы</li>
-                <li>Избранное</li>
-                <li>Выйти</li>
+                <li onclick="window.location = '/logout'">Выйти</li>
             </ul>
         </div>
     @endauth

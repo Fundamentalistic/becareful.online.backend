@@ -12,6 +12,13 @@
 .carousel {
   width: 100% !important; }
 
+.block .username {
+  color: #027373; }
+.block .data a {
+  margin-left: 10px; }
+.block .messages {
+  margin-left: 10px; }
+
 h3.alert {
   color: red;
   font-size: 14px;
@@ -38,12 +45,15 @@ h3.alert {
   #shortReviewForm .reviewPane {
     position: absolute;
     background: white;
-    width: 80%;
+    width: 60%;
     height: 80%;
-    left: 10%;
-    right: 10%;
+    left: 20%;
+    right: 20%;
     top: 10%;
     bottom: 10%; }
+    #shortReviewForm .reviewPane .row {
+      width: 50% !important;
+      margin-left: 25% !important; }
     #shortReviewForm .reviewPane input {
       border-radius: 3px;
       border-left: 0;
@@ -109,10 +119,12 @@ body main .rating {
       font-weight: bold; }
   body main .rating .fill {
     cursor: pointer;
-    width: 50px;
     overflow: hidden;
     color: #DBDB19;
-    height: 40px; }
+    height: 40px;
+    margin-right: 100px;
+    margin-top: -5px !important;
+    margin-left: 10px !important; }
     body main .rating .fill .rating-star-fill {
       font-size: 23px; }
 body main .search-ico {
@@ -263,7 +275,6 @@ input[type="file"] {
 .dropdown-user-panel {
   position: fixed;
   width: 150px;
-  height: 150px;
   right: 100px;
   top: 60px;
   background-color: #0367A6;
@@ -274,7 +285,7 @@ input[type="file"] {
   .dropdown-user-panel ul {
     z-index: 1200; }
     .dropdown-user-panel ul li {
-      padding-top: 20px;
+      padding: 20px;
       cursor: pointer; }
 
 .btn-primary {

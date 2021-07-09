@@ -36,6 +36,19 @@ $main-bg-color: #fff;
 .carousel{
     width: 100%!important;
 }
+.block{
+    .username{
+        color: $btn-color-1;
+    }
+    .data{
+        a{
+            margin-left: 10px;
+        }
+    }
+    .messages{
+        margin-left: 10px;
+    }
+}
 h3.alert{
     color: red;
     font-size: 14px;
@@ -65,12 +78,17 @@ h3.alert{
     .reviewPane{
         position: absolute;
         background: rgba(255,255,255,1);
-        width: 80%;
+        width: 60%;
         height: 80%;
-        left: 10%;
-        right: 10%;
+        left: 20%;
+        right: 20%;
         top: 10%;
         bottom: 10%;
+
+        .row{
+            width: 50% !important;
+            margin-left: 25%!important;
+        }
 
         input{
             border-radius: 3px;
@@ -165,10 +183,12 @@ body{
             }
             .fill{
                 cursor: pointer;
-                width: 50px;
                 overflow: hidden;
                 color: #DBDB19;
                 height: 40px;
+                margin-right: 100px;
+                margin-top: -5px!important;
+                margin-left: 10px!important;
                 .rating-star-fill{
                     font-size: 23px;
                 }
@@ -352,7 +372,6 @@ input[type="file"]{
 .dropdown-user-panel{
     position: fixed;
     width: 150px;
-    height: 150px;
     right: 100px;
     top: 60px;
     background-color: #0367A6;
@@ -364,7 +383,7 @@ input[type="file"]{
     ul{
         z-index: 1200;
         li{
-            padding-top: 20px;
+            margin: 20px;
             cursor: pointer;
         }
     }

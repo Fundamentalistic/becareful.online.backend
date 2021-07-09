@@ -109,24 +109,6 @@ reviews.component('short-review', {
         "                <div class=\"white-block\"></div>" +
         "                <div class=\"user-data row\">" +
         "                    <div class=\"username\">{{username}}</div>" +
-        "                    <div class=\"userrating\">" +
-        "                        <div class=\"rating ml-2\">" +
-        "                            <div class=\"empty\">" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                                <i class=\"rating-star\">☆</i>" +
-        "                            </div>" +
-        "                            <div class=\"fill\" v-bind:style=\"'width: '+userrating+'px; max-height: 20px'\"><!--Ширина используется для управления строкой рейтинга-->" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                                <i class=\"rating-star-fill\">★</i>" +
-        "                            </div>" +
-        "                        </div>" +
-        "                    </div>" +
         "                </div>" +
         "            </div>" +
         "        </div>"
