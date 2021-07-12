@@ -76,10 +76,18 @@ input:focus {
 body header {
   background-color: #0367A6;
   color: #fff;
-  min-height: 50px;
   font-size: 15px; }
+  @media screen and (max-width: 4810px) {
+    body header .menu, body header .uinput {
+      display: block; } }
+  @media screen and (max-width: 700px) {
+    body header .menu, body header .uinput {
+      display: none !important; } }
   body header a:visited {
     color: #fff; }
+  @media screen and (max-width: 4810px) {
+    body header {
+      min-width: 50px; } }
   body header .main-menu {
     min-height: 100%; }
     body header .main-menu a {
@@ -96,6 +104,10 @@ body img {
 body .logo {
   border-radius: 0 !important;
   background-color: rgba(0, 0, 0, 0) !important; }
+  @media screen and (max-width: 700px) {
+    body .logo {
+      height: auto;
+      min-width: 100%; } }
 body .main-photo img {
   min-height: 100%; }
 body main .messages {
@@ -140,16 +152,38 @@ body main .search {
   border: 1px solid #000;
   border-radius: 5px;
   z-index: 100;
-  height: 34px !important;
   margin-top: 33px;
   box-shadow: 0 3px 10px 0 rgba(30, 30, 30, 0.8); }
+  @media screen and (max-width: 5000px) {
+    body main .search {
+      height: 34px !important; } }
+  @media screen and (max-width: 700px) {
+    body main .search {
+      height: 150px !important;
+      width: 100% !important;
+      font-size: 100px; } }
+@media screen and (max-width: 700px) {
+  body main .search-block-mobile {
+    display: block !important;
+    min-height: 100px;
+    background-color: #FBFBFB; } }
+@media screen and (max-width: 5000px) and (min-width: 701px) {
+  body main .search-block-mobile {
+    display: none !important; } }
 body main .search-block {
   margin-top: 5px;
   min-height: 100px;
   background-color: #FBFBFB; }
+  @media screen and (max-width: 700px) {
+    body main .search-block {
+      display: none !important; } }
 body main .new-reviews {
   background-color: #FBFBFB;
   min-height: 100%; }
+  @media screen and (max-width: 700px) {
+    body main .new-reviews {
+      min-width: 100% !important;
+      margin-top: -70px !important; } }
   body main .new-reviews .block:hover {
     border: 1px solid #027373; }
   body main .new-reviews .block {
@@ -157,6 +191,9 @@ body main .new-reviews {
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #ddd; }
+    @media screen and (max-width: 700px) {
+      body main .new-reviews .block {
+        height: 250px; } }
     body main .new-reviews .block .content {
       font-size: 14px;
       max-height: 85px;
