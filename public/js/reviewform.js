@@ -120,6 +120,11 @@ form.component('new-review-form', {
             document.querySelector('.sliderComponent').src = '';
             document.querySelector('.sliderComponent').style.display = "none";
         },
+        updateFastRating: function(val) {
+            this.commonscore = val;
+            console.log("common score was set at ");
+            console.log(this);
+        },
         sendNewReview: function(){
             console.log("sending start");
             console.log(this);
@@ -158,6 +163,7 @@ form.component('new-review-form', {
                 header: this.reviewheader,
                 content: this.content
             };
+            console.log(request);
             let self = this;
             this.error_text = "";
             window.localStorage.removeItem('images');
@@ -215,7 +221,7 @@ form.component('new-review-form', {
         "</div>" +
         "  </div>" +
         "  <hr class=\"divider\"/>" +
-        "<rating v-bind:rating='commonscore' description='Общая оценка'></rating>"+
+        "<rating v-on:updateRating='updateFastRating' description='Общая оценка'></rating>"+
         "<rating v-bind:rating='trustscore' description='Индекс доверия'></rating>"+
         "<rating v-bind:rating='convenience' description='Удобство'></rating>"+
         "</div>" +

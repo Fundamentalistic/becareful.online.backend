@@ -59,8 +59,12 @@ h3.alert {
       border-left: 0;
       border-right: 0;
       border-top: 0; }
-    #shortReviewForm .reviewPane textarea {
-      height: 300px; }
+    @media only screen and (min-height: 1100px) and (max-height: 8000px) {
+      #shortReviewForm .reviewPane textarea {
+        height: 300px !important; } }
+    @media only screen and (max-height: 1100px) {
+      #shortReviewForm .reviewPane textarea {
+        height: 200px !important; } }
 
 input:focus {
   outline-width: 0; }
@@ -285,7 +289,7 @@ input[type="file"] {
   .dropdown-user-panel ul {
     z-index: 1200; }
     .dropdown-user-panel ul li {
-      padding: 20px;
+      margin: 20px;
       cursor: pointer; }
 
 .btn-primary {

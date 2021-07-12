@@ -69,7 +69,42 @@ class SiteController extends Controller
             $data['reviews'] = $data['reviews']->toArray();
         }
 
+        $data['site_id'] = $site_id;
+
         return view('main', $data);
+    }
+
+    public function append_review(Request $request){
+        try{
+            $user_id = Auth::user()->id;
+        }catch (\Exception $e){
+            throw new AuthenticationException($e->getMessage());
+        }
+
+        $review = new Review;
+        $data = $request->toArray();
+        $data['user_id'] = $user_id;
+
+        $screenshot_links = [];
+        foreach($data['images'] as $key => $image){
+            $sp = explode(";base64,", $image);
+            $type = explode(":image/", $sp[0])[1];
+            $base64content = $sp[1];
+            $filename = substr(sha1(rand()), 0, 12);
+            $image_byte_array = base64_decode($base64content);
+            $filePath = "public/screenshots/" . $data['site_id'] . "/" . $filename . "." . $type;
+            Storage::put($filePath, $image_byte_array);
+            $url = Storage::url($filePath);
+            array_push($screenshot_links, $url);
+        }
+
+        $screenshots_links = implode(", ", $screenshot_links);
+        $data['screenshots'] = $screenshot_links;
+
+        $review->fill($data);
+        $review->save();
+
+
     }
 
     public function create(Request $request){

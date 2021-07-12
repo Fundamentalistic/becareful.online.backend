@@ -61,7 +61,7 @@ let rating_obj = {
         setRating: function(val){
             console.log(val);
             this.ratingscore = val;
-            this.$emit('input', val, this);
+            this.$emit('updaterating', val, this);
         }
     }
 };

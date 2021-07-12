@@ -19,6 +19,7 @@ var reviews = Vue.createApp({
                 self.last_page_url = response.data.last_page_url;
                 self.next_page_url = response.data.next_page_url;
                 self.current_page += 1;
+                console.log(self.review_list);
             });
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight-50) {

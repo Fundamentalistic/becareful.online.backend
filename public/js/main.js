@@ -1,9 +1,6 @@
 var main = Vue.createApp({
 	mounted() {
-		let params = window.location.search;
-		params = new URLSearchParams(params);
-		this.site_id = params.get('site_id');
-		console.log(this.site_id);
+        this.site_id = parseInt(document.querySelector('#site_id').value);
 	},
 	data(){
 		return {
@@ -21,6 +18,10 @@ var main = Vue.createApp({
         }
 	},
 	methods: {
+	    updateFastRating(val){
+            this.commonscore = val;
+            console.log(this.commonscore);
+        },
         openFileManager: function(){
             document.querySelector('#hidedFileInput').click();
         },
@@ -84,20 +85,21 @@ var main = Vue.createApp({
                 images: this.images === [] ? "" : this.images,
                 rating: this.commonscore,
                 header: this.header,
-                content: this.content
+                content: this.content,
+                site_id: this.site_id
             };
             let self = this;
             this.error_text = "";
             window.localStorage.removeItem('images');
             window.localStorage.clear();
-            axios.post('/new', request, {
+            axios.post('/new/review', request, {
                 'Content-Type': 'application/json',
             }).then(function(result){
                 console.log("OK");
                 console.log(result);
-                self.result_text = "Вы только что добавили новый отзыв о сайте"
+                document.querySelector('div.reviewPane').innerHTML = self.result_text;
                 setTimeout(() => {
-                    self.result_text = "";
+                    window.location.reload();
                 }, 2000);
             }).catch(function(error){
                 console.log("ERROR");
@@ -148,7 +150,7 @@ main.component('rating', {
             console.log(val);
             this.ratingscore = val;
             this.margin = 100 - val;
-            this.$emit('input', val, this)
+            this.$emit('updaterating', val, this)
         }
     }
 });

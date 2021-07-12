@@ -42,6 +42,8 @@ Route::post('/review/new', [\App\Http\Controllers\ReviewController::class, 'crea
 Route::get('/main/{site_id}', [\App\Http\Controllers\SiteController::class, 'main']); // Выполнено
 Route::post('/site/new', [\App\Http\Controllers\SiteController::class, 'create']);
 
+Route::middleware('auth')->post('/new/review', [\App\Http\Controllers\SiteController::class, 'append_review']);
+
 Route::middleware('cors')->group(function(){
 
     Route::get('/links', [App\Http\Controllers\PageController::class, 'links']);
