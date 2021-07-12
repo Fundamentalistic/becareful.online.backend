@@ -28,7 +28,7 @@
         </div>
     @endauth
     @guest
-        <div class="uinput col-md-2 d-none d-md-block"><a href="/login">Войти</a><div style="width: 10px"></div>    <a href="/register">Зарегистрироваться</a></div>
+        <div class="uinput col-md-2 d-none d-md-block"><a href="/login">Войти</a><div style="width: 10px"></div><a href="/register">Зарегистрироваться</a></div>
     @endguest
 </header>
     @yield('content')
