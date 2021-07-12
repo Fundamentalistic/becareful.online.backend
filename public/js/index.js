@@ -57,6 +57,20 @@ var reviews = Vue.createApp({
                     });
             }
         });
+        let search_mobile = document.querySelector('#search-mobile');
+        search_mobile.addEventListener('keyup', (e) => {
+            if(e.key === "Enter"){
+                axios.get("/review/search", {
+                    params: {
+                        search: search.value
+                    }
+                }).then(function(response){
+                    console.log(response);
+                    self.last_page_url = response.data.last_page_url;
+                    self.review_list = response.data.data;
+                });
+            }
+        });
     }
 });
 

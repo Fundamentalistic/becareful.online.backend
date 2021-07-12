@@ -7,7 +7,7 @@
             <img src="/imgs/search2.png" alt="Найти" class="search-ico"/>
         </div>
         <div class="container-fluid search-block-mobile d-flex justify-content-center">
-            <input type="text" class="search col-md-6 col-sm-12 col-xs-12" id="search" name="search" placeholder="Поиск">
+            <input type="text" class="search" id="search-mobile" name="search" placeholder="Поиск">
             <img src="/imgs/search2.png" alt="Найти" class="search-ico"/>
         </div>
         <div id="currentReviewsContainer" class="new-reviews container col-md-8 m-1">

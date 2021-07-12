@@ -16,7 +16,7 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $pagination = 10;
+    private $pagination = 20;
 
     public function index()
     {
