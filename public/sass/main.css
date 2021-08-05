@@ -1,0 +1,458 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+/* Color Theme Swatches in Hex */
+/* Color Theme Swatches in RGBA */
+/* Color Theme Swatches in HSLA */
+.carousel-item {
+  overflow: hidden;
+  height: 450px; }
+
+.alert-state {
+  border-color: red !important; }
+
+.carousel {
+  width: 100% !important; }
+
+.block .username {
+  color: #027373; }
+.block .data a {
+  margin-left: 10px; }
+.block .messages {
+  margin-left: 10px; }
+  @media screen and (max-width: 1000px) {
+    .block .messages {
+      display: none; } }
+
+h3.alert {
+  color: red;
+  font-size: 14px;
+  margin-left: 100px; }
+
+#shortReviewForm {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0; }
+  #shortReviewForm .background {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%; }
+  #shortReviewForm .reviewPane {
+    position: absolute;
+    background: white;
+    width: 60%;
+    height: 80%;
+    left: 20%;
+    right: 20%;
+    top: 10%;
+    bottom: 10%; }
+    #shortReviewForm .reviewPane .row {
+      width: 50% !important;
+      margin-left: 25% !important; }
+    #shortReviewForm .reviewPane input {
+      border-radius: 3px;
+      border-left: 0;
+      border-right: 0;
+      border-top: 0; }
+    @media only screen and (min-height: 1000px) and (max-height: 8000px) {
+      #shortReviewForm .reviewPane textarea {
+        height: 300px !important; } }
+    @media only screen and (max-height: 1000px) {
+      #shortReviewForm .reviewPane textarea {
+        height: 200px !important; } }
+
+input:focus {
+  outline-width: 0; }
+
+.absolute-right {
+  position: absolute;
+  right: 1.5%; }
+
+.hide-menu {
+  display: none !important; }
+
+body header {
+  background-color: #0367A6;
+  color: #fff;
+  font-size: 15px; }
+  body header .mobile a {
+    min-height: 30px; }
+  @media screen and (max-width: 1000px) {
+    body header .mobile-menu {
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 10px; }
+      body header .mobile-menu svg {
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        fill: #fff; } }
+  @media screen and (min-width: 1001px) {
+    body header .mobile-menu {
+      display: none; } }
+  @media (max-width: 4810px) {
+    body header .menu, body header .uinput {
+      display: block; } }
+  @media (max-width: 981px) {
+    body header .menu, body header .uinput {
+      display: none !important; } }
+  body header a:visited {
+    color: #fff; }
+  @media screen and (max-width: 4810px) {
+    body header {
+      min-width: 50px; } }
+  body header .main-menu {
+    min-height: 100%; }
+    body header .main-menu a {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 20px; }
+  body header a:link {
+    color: #fff; }
+  body header .uinput {
+    margin-top: auto;
+    margin-bottom: auto; }
+body img {
+  border-radius: 8px; }
+body .logo {
+  border-radius: 0 !important;
+  background-color: rgba(0, 0, 0, 0) !important; }
+  @media screen and (max-width: 1000px) {
+    body .logo {
+      height: auto; } }
+body .main-photo img {
+  min-height: 100%; }
+body main .messages {
+  width: 50px;
+  margin-left: 1px;
+  margin-top: 10px; }
+  body main .messages .message-count {
+    margin-top: -4px;
+    margin-left: 3px; }
+  body main .messages img {
+    max-height: 20px;
+    max-width: 20px; }
+    @media screen and (max-width: 1000px) {
+      body main .messages img {
+        max-height: 38px;
+        max-width: 38px; } }
+body main .rating {
+  position: relative;
+  cursor: pointer; }
+  @media (max-width: 1000px) {
+    body main .rating {
+      position: absolute;
+      cursor: pointer;
+      right: 50px;
+      width: 120px;
+      margin-top: -25px; } }
+  body main .rating .empty {
+    position: absolute;
+    min-width: 120px;
+    cursor: pointer;
+    margin-top: -5px !important;
+    margin-left: 10px !important; }
+    body main .rating .empty .rating-star {
+      color: #dbdb19;
+      font-size: 23px;
+      font-weight: bold; }
+      @media screen and (max-width: 1000px) {
+        body main .rating .empty .rating-star {
+          font-size: 20px; } }
+  body main .rating .fill {
+    cursor: pointer;
+    overflow: hidden;
+    color: #DBDB19;
+    height: 40px;
+    margin-right: 100px;
+    margin-top: -5px !important;
+    margin-left: 10px !important; }
+    @media screen and (max-width: 5000px) {
+      body main .rating .fill .rating-star-fill {
+        font-size: 23px; } }
+    @media screen and (max-width: 1000px) {
+      body main .rating .fill .rating-star-fill {
+        font-size: 20px; } }
+body main .search-ico {
+  max-width: 25px;
+  max-height: 25px;
+  margin: 38px -40px;
+  z-index: 1010; }
+body main .search {
+  border: 1px solid #000;
+  border-radius: 5px;
+  z-index: 100;
+  margin-top: 33px;
+  box-shadow: 0 3px 10px 0 rgba(30, 30, 30, 0.8); }
+  @media screen and (max-width: 5000px) {
+    body main .search {
+      height: 34px !important; } }
+  @media screen and (max-width: 1000px) {
+    body main .search {
+      height: 50px !important;
+      width: 100% !important;
+      font-size: 25px; } }
+@media screen and (max-width: 1000px) {
+  body main .search-block-mobile {
+    display: block !important;
+    min-height: 100px;
+    background-color: #FBFBFB; } }
+@media screen and (max-width: 5000px) and (min-width: 1000px) {
+  body main .search-block-mobile {
+    display: none !important; } }
+body main .search-block {
+  margin-top: 5px;
+  min-height: 100px;
+  background-color: #FBFBFB; }
+  @media screen and (max-width: 1000px) {
+    body main .search-block {
+      display: none !important; } }
+body main .new-reviews {
+  background-color: #FBFBFB;
+  min-height: 100%; }
+  @media screen and (max-width: 1000px) {
+    body main .new-reviews {
+      min-width: 100% !important;
+      margin-top: -70px !important; } }
+  body main .new-reviews .block:hover {
+    border: 1px solid #027373; }
+  body main .new-reviews .block {
+    user-select: none;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ddd; }
+    @media screen and (max-width: 1000px) {
+      body main .new-reviews .block {
+        height: 200px; } }
+    body main .new-reviews .block .content {
+      overflow: hidden; }
+      @media screen and (max-width: 1000px) {
+        body main .new-reviews .block .content {
+          font-size: 20px;
+          min-height: 150px;
+          max-height: 70% !important; } }
+      @media screen and (min-width: 1001px) and (max-width: 5000px) {
+        body main .new-reviews .block .content {
+          font-size: 14px;
+          max-height: 85px; } }
+      @media (max-width: 1743px) {
+        body main .new-reviews .block .content {
+          min-width: 100% !important; } }
+    @media screen and (max-width: 1000px) {
+      body main .new-reviews .block .main-photo {
+        display: none; } }
+    @media screen and (min-width: 1001px) and (max-width: 5000px) {
+      body main .new-reviews .block .main-photo {
+        max-height: 100px;
+        max-width: 100px; } }
+    body main .new-reviews .block .main-photo img {
+      width: 100%; }
+    body main .new-reviews .block .white-block {
+      width: 80%;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      background: linear-gradient(270deg, white 0%, white 80%, rgba(255, 255, 255, 0) 100%);
+      margin-right: 10px; }
+      @media (max-width: 1000px) {
+        body main .new-reviews .block .white-block {
+          height: 30px; } }
+      @media (min-width: 1001px) and (max-width: 5000px) {
+        body main .new-reviews .block .white-block {
+          height: 20px; } }
+    body main .new-reviews .block .user-data {
+      position: absolute;
+      right: 110px;
+      bottom: 0;
+      font-style: italic; }
+    body main .new-reviews .block .data {
+      width: 150px; }
+      @media screen and (max-width: 1000px) {
+        body main .new-reviews .block .data {
+          font-size: 20px;
+          width: 100%;
+          margin-left: 30px; } }
+
+.main-border {
+  position: relative;
+  top: 3px;
+  bottom: 1px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #FBFBFB;
+  overflow: auto;
+  padding-right: 17px;
+  /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box;
+  /* So the width will be 100% + 17px */ }
+  .main-border #content {
+    min-height: 500px;
+    height: 500px; }
+
+.site-logo {
+  min-height: 200px;
+  min-width: 200px;
+  border-radius: 30px;
+  margin-top: 30px;
+  margin-left: 30px; }
+
+.common-panel {
+  margin-top: 60px;
+  margin-left: 30px; }
+  .common-panel .messages {
+    margin-left: 15px;
+    width: 100px; }
+    .common-panel .messages img {
+      max-height: 20px;
+      max-width: 20px; }
+  .common-panel .percents {
+    font-size: 30px; }
+    .common-panel .percents .good-reviews {
+      color: limegreen; }
+    .common-panel .percents .bad-reviews {
+      color: firebrick; }
+
+.btn-panel input[type="button"] {
+  width: 180px;
+  height: 50px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background-color: #027373;
+  color: #fff;
+  border: 0; }
+
+.reviews {
+  margin-top: 30px; }
+  .reviews .review {
+    position: relative;
+    border: 1px solid rgba(100, 100, 100, 0.3);
+    border-radius: 8px;
+    margin-top: 30px;
+    background-color: #fff; }
+    .reviews .review .rating {
+      position: absolute;
+      top: 20px;
+      right: 50px; }
+    .reviews .review .username {
+      position: absolute;
+      top: 20px;
+      left: 15px;
+      color: #027373; }
+    .reviews .review .review-content {
+      margin: 50px 15px 45px;
+      font-size: 14px;
+      border-top: 1px solid rgba(100, 100, 100, 0.3);
+      padding-top: 15px; }
+    .reviews .review .date {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      color: #0B42FF; }
+    .reviews .review .review-title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 610;
+      padding-left: 150px;
+      padding-top: 30px;
+      padding-right: 150px;
+      margin-bottom: -30px; }
+
+input[type="file"] {
+  display: none; }
+
+.uinput {
+  cursor: pointer; }
+
+.dropdown-user-panel {
+  position: fixed;
+  width: 150px;
+  right: 100px;
+  top: 60px;
+  background-color: #0367A6;
+  z-index: 1100;
+  box-shadow: 3px 1px 12px 1px rgba(100, 100, 100, 0.5);
+  border: 1px solid #fff;
+  border-radius: 4px; }
+  .dropdown-user-panel ul {
+    z-index: 1200; }
+    .dropdown-user-panel ul li {
+      margin: 20px;
+      cursor: pointer; }
+
+.btn-primary {
+  background-color: #027373 !important;
+  width: 120px;
+  height: 50px;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  outline-width: 0; }
+
+.btn-primary:focus {
+  outline: none; }
+
+#hidedFileInput {
+  position: fixed; }
+  #hidedFileInput img {
+    position: fixed;
+    max-width: 80%;
+    max-height: 90%;
+    margin-left: auto;
+    margin-right: auto; }
+
+.background-plane {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1010; }
+
+.sliderComponent {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  max-width: 90%;
+  top: 5%;
+  max-height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 1;
+  z-index: 1020; }
+
+main {
+  background: rgba(0, 0, 0, 0.017); }
+
+.carousel-control-next:hover, .carousel-control-prev:hover {
+  background-color: rgba(0, 0, 0, 0.05); }
+
+.round-border {
+  border-radius: 5px; }
+
+body {
+  font-family: "Open Sans", sans-serif !important; }
+
+.alert-container div {
+  font-size: 19px; }
+.alert-container .date {
+  color: #027373;
+  font-size: 21px; }
+
+.note {
+  font-size: 14px !important; }
+
+/*# sourceMappingURL=main.css.map */
