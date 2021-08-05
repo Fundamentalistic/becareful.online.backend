@@ -122,10 +122,33 @@ input:focus {
     position: absolute;
     right: 1.5%;
 }
-
+.hide-menu{
+    display: none !important;
+}
 body{
     header{
-
+        .mobile{
+            a{
+                min-height: 30px;
+            }
+        }
+        .mobile-menu{
+            @media screen and (max-width: 1000px) {
+                display: block;
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                svg {
+                    width: 50px;
+                    height: 50px;
+                    color: #fff;
+                    fill: #fff;
+                }
+            }
+            @media screen and (min-width: 1001px){
+                display: none;
+            }
+        }
         .menu, .uinput {
             @media (max-width: 4810px) {
                 display: block;
@@ -169,7 +192,6 @@ body{
         background-color: rgba(0, 0, 0, 0)!important;
         @media screen and (max-width: 1000px){
             height: auto;
-            min-width: 100%;
         }
     }
     .main-photo{
@@ -200,15 +222,15 @@ body{
             @media (max-width: 1000px){
                 position: absolute;
                 cursor: pointer;
-                right: 10px;
-                width: 300px;
-                margin-top: -90px;
+                right: 50px;
+                width: 120px;
+                margin-top: -25px;
             }
             position: relative;
             cursor: pointer;
             .empty{
                 position: absolute;
-                min-width: 100px;
+                min-width: 120px;
                 cursor: pointer;
                 margin-top: -5px!important;
                 margin-left: 10px!important;
@@ -217,7 +239,7 @@ body{
                     font-size: 23px;
                     font-weight: bold;
                     @media screen and (max-width: 1000px){
-                        font-size: 38px;
+                        font-size: 20px;
                     }
                 }
             }
@@ -230,7 +252,12 @@ body{
                 margin-top: -5px!important;
                 margin-left: 10px!important;
                 .rating-star-fill{
-                    font-size: 23px;
+                    @media screen and (max-width: 5000px) {
+                        font-size: 23px;
+                    }
+                    @media screen and (max-width: 1000px) {
+                        font-size: 20px;
+                    }
                 }
             }
         }
@@ -248,9 +275,9 @@ body{
                 height: 34px!important;
             }
             @media screen and (max-width: 1000px) {
-                height: 150px!important;
+                height: 50px!important;
                 width: 100%!important;
-                font-size: 100px;
+                font-size: 25px;
             }
             margin-top: 33px;
             box-shadow: 0 3px 10px 0 rgba(30, 30, 30, 0.8);
@@ -290,12 +317,12 @@ body{
                 border-radius: 10px;
                 border: 1px solid #ddd;
                 @media screen and (max-width: 1000px){
-                    height: 500px;
+                    height: 200px;
                 }
                 .content{
                     @media screen and (max-width: 1000px){
-                        font-size: 34px;
-                        min-height: 300px;
+                        font-size: 20px;
+                        min-height: 150px;
                         max-height: 70%!important;
                     }
                     @media screen and (min-width: 1001px) and (max-width: 5000px){
@@ -342,8 +369,9 @@ body{
                 }
                 .data{
                     @media screen and (max-width: 1000px){
-                        font-size: 60px;
+                        font-size: 20px;
                         width: 100%;
+                        margin-left: 30px;
                     }
                     width: 150px;
                 }

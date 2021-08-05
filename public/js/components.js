@@ -4,10 +4,12 @@ let menu_object = {
 };
 
 var header1 = Vue.createApp({
+    el: "header",
     data(){
         return {
             title: "BECAREFUL - сайт о других сайтах. Отзывы и рейтинги. Будь в курсе того кому можно верить, а кому нет",
             links: [],
+            mobileMenuStatement: true,
         }
     },
     mounted(){
@@ -19,6 +21,12 @@ var header1 = Vue.createApp({
                 this.$data.links = response.data;
             }
         });
+    },
+    methods: {
+        menuAction: function(){
+            console.log(this.mobileMenuStatement);
+            this.mobileMenuStatement = !this.mobileMenuStatement;
+        }
     }
 });
 
