@@ -95,6 +95,9 @@ document.querySelector('.uinput').onclick = (event) => {
 
 };
 
-document.querySelector('.dropdown-user-panel').addEventListener("onmouseleave", () => {
-    document.querySelector('.dropdown-user-panel').style.display = "none";
-});
+if(document.querySelector('.dropdown-user-panel')){
+    document.querySelector('.dropdown-user-panel').addEventListener("onmouseleave", () => {
+        document.querySelector('.dropdown-user-panel').style.display = "none";
+    });
+}
+

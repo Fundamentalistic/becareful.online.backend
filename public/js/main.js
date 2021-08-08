@@ -1,11 +1,14 @@
 var main = Vue.createApp({
 	mounted() {
         this.site_id = parseInt(document.querySelector('#site_id').value);
+        this.onResizeMethod();
+        window.addEventListener('resize', this.onResizeMethod);
 	},
 	data(){
 		return {
 		    site_id: 0,
             images: [],
+            isMobile: false,
             errors: {
                 emptyMain: false,
                 emptyImages: false,
@@ -14,10 +17,20 @@ var main = Vue.createApp({
             },
             header: "",
             content: "",
-            commonscore: 0
+            commonscore: 0,
         }
 	},
-	methods: {
+    destroyed() {
+        window.removeEventListener('resize', this.onResizeMethod);
+    },
+    methods: {
+	    onResizeMethod(){
+            if(window.innerWidth < 1000){
+                this.isMobile = true;
+            }else{
+                this.isMobile = false;
+            }
+        },
 	    updateFastRating(val){
             this.commonscore = val;
             console.log(this.commonscore);

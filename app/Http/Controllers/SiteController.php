@@ -69,6 +69,14 @@ class SiteController extends Controller
             $data['reviews'] = $data['reviews']->toArray();
         }
 
+        foreach($data['reviews'] as &$review){
+            $sp = explode("T", $review['created_at']);
+            $completeDate = $sp[0];
+            $sp = explode(".", $sp[1]);
+            $completeDate .= " " . $sp[0];
+            $review['created_at'] = $completeDate;
+        }
+
         $data['site_id'] = $site_id;
 
         return view('main', $data);

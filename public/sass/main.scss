@@ -52,6 +52,12 @@ $main-bg-color: #fff;
         }
     }
 }
+@media screen and (max-width: 1000px) {
+    .main-rating{
+        margin-top: 48px;
+    }
+}
+
 h3.alert{
     color: red;
     font-size: 14px;
@@ -130,6 +136,8 @@ body{
         .mobile{
             a{
                 min-height: 30px;
+                padding-top: 20px;
+                padding-bottom: 20px;
             }
         }
         .mobile-menu{
@@ -139,8 +147,8 @@ body{
                 right: 10px;
                 top: 10px;
                 svg {
-                    width: 50px;
-                    height: 50px;
+                    width: 120px;
+                    height: 120px;
                     color: #fff;
                     fill: #fff;
                 }
@@ -167,7 +175,12 @@ body{
         @media screen and (max-width: 4810px) {
             min-width: 50px;
         }
-        font-size: 15px;
+        @media screen and (max-width: 1000px){
+            font-size: 50px;
+        }
+        @media screen and (min-width: 1001px){
+            font-size: 15px;
+        }
         .main-menu{
             min-height: 100%;
             a{
@@ -191,7 +204,7 @@ body{
         border-radius: 0!important;
         background-color: rgba(0, 0, 0, 0)!important;
         @media screen and (max-width: 1000px){
-            height: auto;
+            height: 140px;
         }
     }
     .main-photo{
@@ -201,6 +214,13 @@ body{
     }
 
     main{
+        h1{
+            a{
+                @media screen and (max-width: 1000px){
+                    font-size: 60px;
+                }
+            }
+        }
         .messages{
             width: 50px;
             margin-left: 1px;
@@ -222,15 +242,20 @@ body{
             @media (max-width: 1000px){
                 position: absolute;
                 cursor: pointer;
-                right: 50px;
-                width: 120px;
-                margin-top: -25px;
+                right: 100px;
+                width: 240px;
+                margin-top: -52px;
             }
             position: relative;
             cursor: pointer;
             .empty{
                 position: absolute;
-                min-width: 120px;
+                @media screen and (max-width: 1000px){
+                    min-width: 240px;
+                }
+                @media screen and (min-width: 1001px){
+                    min-width: 120px;
+                }
                 cursor: pointer;
                 margin-top: -5px!important;
                 margin-left: 10px!important;
@@ -239,7 +264,7 @@ body{
                     font-size: 23px;
                     font-weight: bold;
                     @media screen and (max-width: 1000px){
-                        font-size: 20px;
+                        font-size: 40px;
                     }
                 }
             }
@@ -256,7 +281,7 @@ body{
                         font-size: 23px;
                     }
                     @media screen and (max-width: 1000px) {
-                        font-size: 20px;
+                        font-size: 40px;
                     }
                 }
             }
@@ -275,9 +300,10 @@ body{
                 height: 34px!important;
             }
             @media screen and (max-width: 1000px) {
-                height: 50px!important;
+                height: 100px !important;
                 width: 100%!important;
-                font-size: 25px;
+                font-size: 38px;
+                padding-left: 25px;
             }
             margin-top: 33px;
             box-shadow: 0 3px 10px 0 rgba(30, 30, 30, 0.8);
@@ -321,9 +347,9 @@ body{
                 }
                 .content{
                     @media screen and (max-width: 1000px){
-                        font-size: 20px;
-                        min-height: 150px;
-                        max-height: 70%!important;
+                        font-size: 40px;
+                        min-height: 120px;
+                        max-height: 120px!important;
                     }
                     @media screen and (min-width: 1001px) and (max-width: 5000px){
                         font-size: 14px;
@@ -349,7 +375,7 @@ body{
                 .white-block{
                     width: 80%;
                     @media (max-width: 1000px){
-                        height: 30px;
+                        height: 45px;
                     }
                     @media (min-width: 1001px) and (max-width: 5000px) {
                         height: 20px;
@@ -369,7 +395,7 @@ body{
                 }
                 .data{
                     @media screen and (max-width: 1000px){
-                        font-size: 20px;
+                        font-size: 40px;
                         width: 100%;
                         margin-left: 30px;
                     }
@@ -394,6 +420,17 @@ body{
     #content{
         min-height: 500px;
         height: 500px;
+    }
+
+    @media screen and (max-width: 1000px){
+        div, div div div * {
+            font-size: 40px!important;
+            padding-left: 5px!important;
+            padding-right: 5px!important;
+        }
+        div div div .date{
+            font-size: 30px!important;
+        }
     }
 
 }
@@ -427,13 +464,24 @@ body{
 }
 .btn-panel{
     input[type="button"]{
-        width: 180px;
-        height: 50px;
-        margin-top: 10px;
-        border-radius: 8px;
-        background-color: $btn-color-1;
-        color: #fff;
-        border: 0;
+        @media screen and (min-width: 1001px){
+            width: 180px;
+            height: 50px;
+            margin-top: 10px;
+            border-radius: 8px;
+            background-color: $btn-color-1;
+            color: #fff;
+            border: 0;
+        }
+        @media screen and (max-width: 1000px){
+            width: 400px;
+            height: 120px;
+            margin-top: 10px;
+            border-radius: 8px;
+            background-color: $btn-color-1;
+            color: #fff;
+            border: 0;
+        }
     }
 }
 .reviews{
@@ -446,20 +494,35 @@ body{
         background-color: $main-bg-color;
         .rating{
             position: absolute;
-            top: 20px;
-            right: 50px;
+            @media screen and (min-width: 1001px){
+                top: 20px;
+                right: 50px;
+            }
+            @media screen and (max-width: 1000px){
+                top: 74px;
+                right: 45px;
+            }
+
         }
         .username{
             position: absolute;
             top: 20px;
-            left: 15px;
             color: $username-color;
+            @media screen and (min-width: 1001px){
+                left: 15px;
+            }
+            @media screen and (max-width: 1000px){
+                text-align: center;
+                left: 34px;
+            }
         }
         .review-content{
             margin: 50px 15px 45px;
             font-size: 14px;
             border-top: 1px solid rgba(100, 100, 100, 0.3);
             padding-top: 15px;
+            text-align: match-parent;
+
         }
         .date{
             position: absolute;
@@ -467,15 +530,23 @@ body{
             right: 20px;
             color: $link-color;
         }
+
         .review-title{
             text-align: center;
             font-size: 14px;
             font-weight: 610;
-            padding-left: 150px;
-            padding-top: 30px;
-            padding-right: 150px;
-            margin-bottom: -30px;
-
+            @media screen and (min-width: 1001px) {
+                margin-bottom: -30px;
+                padding-top: 30px;
+                padding-left: 150px;
+                padding-right: 150px;
+            }
+            @media screen and (max-width: 1000px) {
+                margin-bottom: 0;
+                margin-top: 100px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
     }
 }
@@ -567,6 +638,9 @@ body{
     font-family: 'Open Sans', sans-serif!important;
 }
 .alert-container{
+    @media screen and (max-width: 1000px){
+        text-align: center;
+    }
     div{
         font-size: 19px;
     }

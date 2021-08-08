@@ -22,6 +22,9 @@
     .block .messages {
       display: none; } }
 
+@media screen and (max-width: 1000px) {
+  .main-rating {
+    margin-top: 48px; } }
 h3.alert {
   color: red;
   font-size: 14px;
@@ -81,10 +84,11 @@ input:focus {
 
 body header {
   background-color: #0367A6;
-  color: #fff;
-  font-size: 15px; }
+  color: #fff; }
   body header .mobile a {
-    min-height: 30px; }
+    min-height: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px; }
   @media screen and (max-width: 1000px) {
     body header .mobile-menu {
       display: block;
@@ -92,8 +96,8 @@ body header {
       right: 10px;
       top: 10px; }
       body header .mobile-menu svg {
-        width: 50px;
-        height: 50px;
+        width: 120px;
+        height: 120px;
         color: #fff;
         fill: #fff; } }
   @media screen and (min-width: 1001px) {
@@ -110,6 +114,12 @@ body header {
   @media screen and (max-width: 4810px) {
     body header {
       min-width: 50px; } }
+  @media screen and (max-width: 1000px) {
+    body header {
+      font-size: 50px; } }
+  @media screen and (min-width: 1001px) {
+    body header {
+      font-size: 15px; } }
   body header .main-menu {
     min-height: 100%; }
     body header .main-menu a {
@@ -128,9 +138,12 @@ body .logo {
   background-color: rgba(0, 0, 0, 0) !important; }
   @media screen and (max-width: 1000px) {
     body .logo {
-      height: auto; } }
+      height: 140px; } }
 body .main-photo img {
   min-height: 100%; }
+@media screen and (max-width: 1000px) {
+  body main h1 a {
+    font-size: 60px; } }
 body main .messages {
   width: 50px;
   margin-left: 1px;
@@ -152,22 +165,27 @@ body main .rating {
     body main .rating {
       position: absolute;
       cursor: pointer;
-      right: 50px;
-      width: 120px;
-      margin-top: -25px; } }
+      right: 100px;
+      width: 240px;
+      margin-top: -52px; } }
   body main .rating .empty {
     position: absolute;
-    min-width: 120px;
     cursor: pointer;
     margin-top: -5px !important;
     margin-left: 10px !important; }
+    @media screen and (max-width: 1000px) {
+      body main .rating .empty {
+        min-width: 240px; } }
+    @media screen and (min-width: 1001px) {
+      body main .rating .empty {
+        min-width: 120px; } }
     body main .rating .empty .rating-star {
       color: #dbdb19;
       font-size: 23px;
       font-weight: bold; }
       @media screen and (max-width: 1000px) {
         body main .rating .empty .rating-star {
-          font-size: 20px; } }
+          font-size: 40px; } }
   body main .rating .fill {
     cursor: pointer;
     overflow: hidden;
@@ -181,7 +199,7 @@ body main .rating {
         font-size: 23px; } }
     @media screen and (max-width: 1000px) {
       body main .rating .fill .rating-star-fill {
-        font-size: 20px; } }
+        font-size: 40px; } }
 body main .search-ico {
   max-width: 25px;
   max-height: 25px;
@@ -198,9 +216,10 @@ body main .search {
       height: 34px !important; } }
   @media screen and (max-width: 1000px) {
     body main .search {
-      height: 50px !important;
+      height: 100px !important;
       width: 100% !important;
-      font-size: 25px; } }
+      font-size: 38px;
+      padding-left: 25px; } }
 @media screen and (max-width: 1000px) {
   body main .search-block-mobile {
     display: block !important;
@@ -237,9 +256,9 @@ body main .new-reviews {
       overflow: hidden; }
       @media screen and (max-width: 1000px) {
         body main .new-reviews .block .content {
-          font-size: 20px;
-          min-height: 150px;
-          max-height: 70% !important; } }
+          font-size: 40px;
+          min-height: 120px;
+          max-height: 120px !important; } }
       @media screen and (min-width: 1001px) and (max-width: 5000px) {
         body main .new-reviews .block .content {
           font-size: 14px;
@@ -266,7 +285,7 @@ body main .new-reviews {
       margin-right: 10px; }
       @media (max-width: 1000px) {
         body main .new-reviews .block .white-block {
-          height: 30px; } }
+          height: 45px; } }
       @media (min-width: 1001px) and (max-width: 5000px) {
         body main .new-reviews .block .white-block {
           height: 20px; } }
@@ -279,7 +298,7 @@ body main .new-reviews {
       width: 150px; }
       @media screen and (max-width: 1000px) {
         body main .new-reviews .block .data {
-          font-size: 20px;
+          font-size: 40px;
           width: 100%;
           margin-left: 30px; } }
 
@@ -298,6 +317,13 @@ body main .new-reviews {
   .main-border #content {
     min-height: 500px;
     height: 500px; }
+  @media screen and (max-width: 1000px) {
+    .main-border div, .main-border div div div * {
+      font-size: 40px !important;
+      padding-left: 5px !important;
+      padding-right: 5px !important; }
+    .main-border div div div .date {
+      font-size: 30px !important; } }
 
 .site-logo {
   min-height: 200px;
@@ -322,14 +348,24 @@ body main .new-reviews {
     .common-panel .percents .bad-reviews {
       color: firebrick; }
 
-.btn-panel input[type="button"] {
-  width: 180px;
-  height: 50px;
-  margin-top: 10px;
-  border-radius: 8px;
-  background-color: #027373;
-  color: #fff;
-  border: 0; }
+@media screen and (min-width: 1001px) {
+  .btn-panel input[type="button"] {
+    width: 180px;
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: #027373;
+    color: #fff;
+    border: 0; } }
+@media screen and (max-width: 1000px) {
+  .btn-panel input[type="button"] {
+    width: 400px;
+    height: 120px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: #027373;
+    color: #fff;
+    border: 0; } }
 
 .reviews {
   margin-top: 30px; }
@@ -340,19 +376,32 @@ body main .new-reviews {
     margin-top: 30px;
     background-color: #fff; }
     .reviews .review .rating {
-      position: absolute;
-      top: 20px;
-      right: 50px; }
+      position: absolute; }
+      @media screen and (min-width: 1001px) {
+        .reviews .review .rating {
+          top: 20px;
+          right: 50px; } }
+      @media screen and (max-width: 1000px) {
+        .reviews .review .rating {
+          top: 74px;
+          right: 45px; } }
     .reviews .review .username {
       position: absolute;
       top: 20px;
-      left: 15px;
       color: #027373; }
+      @media screen and (min-width: 1001px) {
+        .reviews .review .username {
+          left: 15px; } }
+      @media screen and (max-width: 1000px) {
+        .reviews .review .username {
+          text-align: center;
+          left: 34px; } }
     .reviews .review .review-content {
       margin: 50px 15px 45px;
       font-size: 14px;
       border-top: 1px solid rgba(100, 100, 100, 0.3);
-      padding-top: 15px; }
+      padding-top: 15px;
+      text-align: match-parent; }
     .reviews .review .date {
       position: absolute;
       bottom: 10px;
@@ -361,11 +410,19 @@ body main .new-reviews {
     .reviews .review .review-title {
       text-align: center;
       font-size: 14px;
-      font-weight: 610;
-      padding-left: 150px;
-      padding-top: 30px;
-      padding-right: 150px;
-      margin-bottom: -30px; }
+      font-weight: 610; }
+      @media screen and (min-width: 1001px) {
+        .reviews .review .review-title {
+          margin-bottom: -30px;
+          padding-top: 30px;
+          padding-left: 150px;
+          padding-right: 150px; } }
+      @media screen and (max-width: 1000px) {
+        .reviews .review .review-title {
+          margin-bottom: 0;
+          margin-top: 100px;
+          padding-left: 20px;
+          padding-right: 20px; } }
 
 input[type="file"] {
   display: none; }
@@ -446,6 +503,9 @@ main {
 body {
   font-family: "Open Sans", sans-serif !important; }
 
+@media screen and (max-width: 1000px) {
+  .alert-container {
+    text-align: center; } }
 .alert-container div {
   font-size: 19px; }
 .alert-container .date {
