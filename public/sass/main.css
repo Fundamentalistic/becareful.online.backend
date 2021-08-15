@@ -2,6 +2,10 @@
 /* Color Theme Swatches in Hex */
 /* Color Theme Swatches in RGBA */
 /* Color Theme Swatches in HSLA */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+* {
+  font-family: 'Roboto', sans-serif; }
+
 .carousel-item {
   overflow: hidden;
   height: 450px; }
@@ -323,7 +327,7 @@ body main .new-reviews {
       padding-left: 5px !important;
       padding-right: 5px !important; }
     .main-border div div div .date {
-      font-size: 30px !important; } }
+      font-size: 40px !important; } }
 
 .site-logo {
   min-height: 200px;
@@ -509,8 +513,13 @@ body {
 .alert-container div {
   font-size: 19px; }
 .alert-container .date {
-  color: #027373;
-  font-size: 21px; }
+  color: #027373; }
+  @media screen and (min-width: 1001px) {
+    .alert-container .date {
+      font-size: 21px; } }
+  @media screen and (max-width: 1000px) {
+    .alert-container .date {
+      font-size: 40px !important; } }
 
 .note {
   font-size: 14px !important; }

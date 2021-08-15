@@ -26,6 +26,12 @@ $panel-color-1: #FBFBFB;
 $username-color: #027373;
 $main-bg-color: #fff;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 .carousel-item {
     overflow: hidden;
     height: 450px;
@@ -429,7 +435,7 @@ body{
             padding-right: 5px!important;
         }
         div div div .date{
-            font-size: 30px!important;
+            font-size: 40px!important;
         }
     }
 
@@ -646,7 +652,12 @@ body{
     }
     .date{
         color: #027373;
-        font-size: 21px;
+        @media screen and (min-width: 1001px){
+            font-size: 21px;
+        }
+        @media screen and (max-width: 1000px){
+            font-size: 40px!important;
+        }
     }
 }
 .note{

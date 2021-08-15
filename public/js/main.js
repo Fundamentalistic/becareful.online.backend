@@ -125,17 +125,27 @@ var main = Vue.createApp({
 main.component('rating', {
     props: [
         'rating',
-        'description'
+        'description',
+        'editable'
     ],
     mounted: function(){
         console.log('rating was created', this.rating);
         this.ratingscore = this.rating;
         this.margin = 100 - this.rating;
+        console.log(this.editable);
+        if(this.editable === false){
+            this.cursor = 'default';
+        }else{
+            this.cursor = 'pointer';
+        }
+        if(this.editable === undefined){
+            this.editable = true;
+        }
     },
     template: `<div class="form-group row pt-5">
                   <label for="score" class="col-2">{{description}}</label>
                         <div id="score" class="rating col-2">
-                            <div class="empty">
+                            <div class="empty" v-bind:style="'cursor: '+cursor">
                                 <i class="rating-star" v-on:click='setRating(20)'>☆</i>
                                 <i class="rating-star" v-on:click='setRating(40)'>☆</i>
                                 <i class="rating-star" v-on:click='setRating(60)'>☆</i>
@@ -160,10 +170,12 @@ main.component('rating', {
     },
     methods: {
         setRating: function(val){
-            console.log(val);
-            this.ratingscore = val;
-            this.margin = 100 - val;
-            this.$emit('updaterating', val, this)
+            console.log(this.editable);
+            if(this.editable === undefined){
+                this.ratingscore = val;
+                this.margin = 100 - val;
+                this.$emit('updaterating', val, this);
+            }
         }
     }
 });

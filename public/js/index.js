@@ -99,14 +99,14 @@ reviews.component('short-review', {
         "            <div class=\"data mr-3\">" +
         "                <a href=\"#\">{{mainlink}}</a>" +
         "                <div class=\"rating\">" +
-        "                    <div class=\"empty\">" +
+        "                    <div class=\"empty\" style=\"margin-top: 0!important;\">" +
         "                        <i class=\"rating-star\">☆</i>" +
         "                        <i class=\"rating-star\">☆</i>" +
         "                        <i class=\"rating-star\">☆</i>" +
         "                        <i class=\"rating-star\">☆</i>" +
         "                        <i class=\"rating-star\">☆</i>" +
         "                    </div>" +
-        "                    <div class=\"fill\" v-bind:style=\"'width:'+commonscore+'px; height: 20px'\"><!--Ширина используется для управления строкой рейтинга-->" +
+        "                    <div class=\"fill\" v-bind:style=\"'width:'+commonscore+'px; height: 23px'\"><!--Ширина используется для управления строкой рейтинга-->" +
         "                        <i class=\"rating-star-fill\">★</i>" +
         "                        <i class=\"rating-star-fill\">★</i>" +
         "                        <i class=\"rating-star-fill\">★</i>" +
