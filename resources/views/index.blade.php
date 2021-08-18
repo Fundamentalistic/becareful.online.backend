@@ -23,6 +23,9 @@
                 v-bind:userrating="review.userrating"
                 v-bind:siteid="review.site_id"
             ></short-review>
+            <div class="up-btn" :class='{"highlighted": mouseOnUpBtn}'>
+                <img :class='{"rotate-180": back, "highlighted": mouseOnUpBtn}' class="up-img" src="/imgs/up.png" v-on:click="upOrBack"/>
+            </div>
         </div>
     </main>
 @endsection

@@ -76,7 +76,7 @@
 
 
         </div>
-        <div class="dropdown-user-panel" style="display: none">
+        <div class="dropdown-user-panel" style="display: none; width: 250px!important;">
             <ul>
                 <li><a href="/login">Войти</a></li>
                 <li><a href="/register">Зарегистрироваться</a></li>
@@ -86,6 +86,17 @@
     <div v-for="l in links" class="row col-12 mobile" :class='{"d-none": mobileMenuStatement, "d-flex": !mobileMenuStatement, "justify-content-center": !mobileMenuStatement}'>
         <div class="main-menu row">
             <menu-link v-bind:link="l.link" v-bind:text="l.name"></menu-link>
+        </div>
+    </div>
+    <hr class="row col-12 divider mobile" :class='{"d-none": mobileMenuStatement}' style="background-color: rgba(255,255,255,0.5);"/>
+    <div class="row col-12 mobile" :class='{"d-none": mobileMenuStatement, "d-flex": !mobileMenuStatement, "justify-content-center": !mobileMenuStatement}'>
+        <div class="main-menu row">
+            <menu-link v-bind:link="'/login'" v-bind:text="'Войти'"></menu-link>
+        </div>
+    </div>
+    <div class="row col-12 mobile" :class='{"d-none": mobileMenuStatement, "d-flex": !mobileMenuStatement, "justify-content-center": !mobileMenuStatement}'>
+        <div class="main-menu row">
+            <menu-link v-bind:link="'/register'" v-bind:text="'Зарегистрироваться'"></menu-link>
         </div>
     </div>
 </header>

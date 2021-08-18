@@ -86,7 +86,11 @@ document.querySelector('.uinput').onclick = (event) => {
 
     if(!dropdown_user_is_open){
         document.querySelector('.dropdown-user-panel').style.display = "block";
-        document.querySelector('.dropdown-user-panel').style.left = event.x + "px";
+        if(event.x + 250 > window.innerWidth){
+            document.querySelector('.dropdown-user-panel').style.left = (window.innerWidth - 300) + "px";
+        }else{
+            document.querySelector('.dropdown-user-panel').style.left = event.x + "px";
+        }
         document.querySelector('.dropdown-user-panel').style.top = event.y + "px";
     }else{
         document.querySelector('.dropdown-user-panel').style.display = "none";

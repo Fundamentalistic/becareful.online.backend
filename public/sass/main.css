@@ -6,6 +6,41 @@
 * {
   font-family: 'Roboto', sans-serif; }
 
+.highlighted {
+  opacity: 0.8 !important; }
+
+.rotate-180 {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.up-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  min-width: 100px;
+  min-height: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px; }
+  .up-btn img {
+    opacity: 0.3; }
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  width: 80px; }
+
+.uinput svg {
+  stroke: #fff;
+  stroke-width: 15px;
+  fill: #fff;
+  max-width: 30px;
+  max-height: 30px; }
+
 .carousel-item {
   overflow: hidden;
   height: 450px; }
@@ -54,16 +89,31 @@ h3.alert {
     width: 100%; }
   #shortReviewForm .reviewPane {
     position: absolute;
-    background: white;
-    width: 60%;
-    height: 80%;
-    left: 20%;
-    right: 20%;
-    top: 10%;
-    bottom: 10%; }
-    #shortReviewForm .reviewPane .row {
-      width: 50% !important;
-      margin-left: 25% !important; }
+    background: white; }
+    @media screen and (min-width: 1001px) {
+      #shortReviewForm .reviewPane {
+        width: 60%;
+        height: 80%;
+        left: 20%;
+        right: 20%;
+        top: 10%;
+        bottom: 10%; } }
+    @media screen and (max-width: 1000px) {
+      #shortReviewForm .reviewPane {
+        width: 100%;
+        height: 90%;
+        left: 0;
+        right: 0;
+        top: 5%;
+        bottom: 5%; } }
+    @media screen and (max-width: 1000px) {
+      #shortReviewForm .reviewPane .row {
+        width: 94% !important;
+        margin-left: 3%; } }
+    @media screen and (min-width: 1001px) {
+      #shortReviewForm .reviewPane .row {
+        width: 50% !important;
+        margin-left: 25% !important; } }
     #shortReviewForm .reviewPane input {
       border-radius: 3px;
       border-left: 0;
@@ -289,7 +339,7 @@ body main .new-reviews {
       margin-right: 10px; }
       @media (max-width: 1000px) {
         body main .new-reviews .block .white-block {
-          height: 45px; } }
+          height: 50px; } }
       @media (min-width: 1001px) and (max-width: 5000px) {
         body main .new-reviews .block .white-block {
           height: 20px; } }
@@ -434,6 +484,11 @@ input[type="file"] {
 .uinput {
   cursor: pointer; }
 
+@media screen and (max-width: 1000px) {
+  .append-image-btn svg {
+    width: 150px !important;
+    height: 150px !important; } }
+
 .dropdown-user-panel {
   position: fixed;
   width: 150px;
@@ -452,12 +507,18 @@ input[type="file"] {
 
 .btn-primary {
   background-color: #027373 !important;
-  width: 120px;
-  height: 50px;
   color: #fff;
   border: 0;
   border-radius: 3px;
   outline-width: 0; }
+  @media screen and (min-width: 1001px) {
+    .btn-primary {
+      width: 120px;
+      height: 50px; } }
+  @media screen and (max-width: 1000px) {
+    .btn-primary {
+      width: 250px;
+      height: 110px; } }
 
 .btn-primary:focus {
   outline: none; }

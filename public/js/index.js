@@ -6,7 +6,44 @@ var reviews = Vue.createApp({
             last_page_url: "",
             next_page_url: "",
             current_page_url: "",
+            back: false,
+            mouseOnUpBtn: false,
+            lastScrollPosition: 0,
+            savedScrollPosition: 0,
+            upBtn: {
+                background: undefined,
+                png: undefined
+            }
         }
+    },
+    methods: {
+        highlightMouse(){
+            this.mouseOnUpBtn = true;
+        },
+        highlightOff(){
+            this.mouseOnUpBtn = false;
+        },
+        saveScrollPosition(){
+            this.lastScrollPosition = window.scrollY;
+            if(this.lastScrollPosition === 0 && !this.savedScrollPosition){
+                this.upBtn.png.style.opacity = 0.0;
+                this.upBtn.background.style.opacity = 0.0;
+            }else{
+                this.upBtn.png.style.opacity = 0.6;
+                this.upBtn.background.style.opacity = 0.3;
+            }
+        },
+        upOrBack(){
+            console.log(this.back, this.lastScrollPosition);
+            if(!this.back && window.scrollY){
+                this.savedScrollPosition = this.lastScrollPosition;
+                window.scrollTo(0, 0);
+                this.back = !this.back;
+            }else{
+                window.scrollTo(0, this.savedScrollPosition);
+                this.back = !this.back;
+            }
+        },
     },
     mounted() {
         let self = this;
@@ -22,6 +59,7 @@ var reviews = Vue.createApp({
                 console.log(self.review_list);
             });
         window.addEventListener('scroll', () => {
+            this.saveScrollPosition();
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight-50) {
                 //console.log(this.review_list);
                 //console.log("this.review_list.last_page_url, this.review_list.last_page_url.indexOf(url) != -1");
@@ -43,6 +81,12 @@ var reviews = Vue.createApp({
                 }
             }
         });
+        this.upBtn.background = document.querySelector('.up-btn');
+        this.upBtn.png = document.querySelector('.up-btn > img');
+        this.upBtn.png.style.opacity = 0.0;
+        this.upBtn.background.style.opacity = 0.0;
+        this.upBtn.background.addEventListener('mouseover', this.highlightMouse);
+        this.upBtn.background.addEventListener('mouseout', this.highlightOff);
         let search = document.querySelector('#search');
         search.addEventListener('keyup', (e) => {
             if(e.key === "Enter"){

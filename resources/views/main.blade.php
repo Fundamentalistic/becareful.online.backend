@@ -88,11 +88,12 @@
     <div id="shortReviewForm">
         <div class="background" v-on:click="hideShortReviewForm"></div>
         <div class="reviewPane" class="container">
+            <img class="close-btn" src="/imgs/close.png" v-on:click="hideShortReviewForm"/>
             <div class="row d-flex justify-content-center mt-5">
                 <h3>Оставить отзыв</h3>
             </div>
             <div class="row d-flex justify-content-start mt-5">
-                <rating v-on:updateRating="updateFastRating" class="col-12" description="Оценка" rating="0"></rating>
+                <rating v-on:updateRating="updateFastRating" class="col-12" description="Оценка" rating="0" style="margin-top: 0!important;"></rating>
             </div>
             <div class="row d-flex justify-content-center mt-5">
                 <input class="col-12 review-form-header" v-model="header" :class="{ 'alert-state': errors.emptyReviewHeader }" name="header" type="text" placeholder="Заголовок"/>
@@ -134,6 +135,9 @@
             <input id="hidedFileInput" type="file" name="secondary-images" class="secondary-images" multiple v-on:change="fileListUpdate()">
         </div>
     </div>
+    </div>
+    <div class="up-btn" :class='{"highlighted": mouseOnUpBtn}'>
+        <img :class='{"rotate-180": back, "highlighted": mouseOnUpBtn}' class="up-img" src="/imgs/up.png" v-on:click="upOrBack"/>
     </div>
 </main>
 @endsection

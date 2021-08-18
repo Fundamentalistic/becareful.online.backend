@@ -3,12 +3,23 @@ var main = Vue.createApp({
         this.site_id = parseInt(document.querySelector('#site_id').value);
         this.onResizeMethod();
         window.addEventListener('resize', this.onResizeMethod);
+        window.addEventListener('scroll', this.saveScrollPosition);
+        this.upBtn.background = document.querySelector('.up-btn');
+        this.upBtn.png = document.querySelector('.up-btn > img');
+        this.upBtn.png.style.opacity = 0.0;
+        this.upBtn.background.style.opacity = 0.0;
+        this.upBtn.background.addEventListener('mouseover', this.highlightMouse);
+        this.upBtn.background.addEventListener('mouseout', this.highlightOff);
 	},
 	data(){
 		return {
 		    site_id: 0,
             images: [],
             isMobile: false,
+            back: false,
+            mouseOnUpBtn: false,
+            lastScrollPosition: 0,
+            savedScrollPosition: 0,
             errors: {
                 emptyMain: false,
                 emptyImages: false,
@@ -18,12 +29,45 @@ var main = Vue.createApp({
             header: "",
             content: "",
             commonscore: 0,
+            upBtn: {
+		        background: undefined,
+                png: undefined
+            }
         }
 	},
     destroyed() {
         window.removeEventListener('resize', this.onResizeMethod);
+        window.removeEventListener('resize', this.saveScrollPosition);
     },
     methods: {
+        highlightMouse(){
+            this.mouseOnUpBtn = true;
+        },
+        highlightOff(){
+            this.mouseOnUpBtn = false;
+        },
+	    saveScrollPosition(){
+	        this.lastScrollPosition = window.scrollY;
+	        if(this.lastScrollPosition === 0 && !this.savedScrollPosition){
+                this.upBtn.png.style.opacity = 0.0;
+                this.upBtn.background.style.opacity = 0.0;
+            }else{
+                this.upBtn.png.style.opacity = 0.6;
+                this.upBtn.background.style.opacity = 0.3;
+            }
+        },
+	    upOrBack(){
+	        console.log(this.back, this.lastScrollPosition);
+	        let intermediateScrollPosition = 0;
+            if(!this.back && window.scrollY){
+                this.savedScrollPosition = this.lastScrollPosition;
+                window.scrollTo(0, 0);
+                this.back = !this.back;
+            }else{
+                window.scrollTo(0, this.savedScrollPosition);
+                this.back = !this.back;
+            }
+        },
 	    onResizeMethod(){
             if(window.innerWidth < 1000){
                 this.isMobile = true;
