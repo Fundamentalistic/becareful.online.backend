@@ -18,13 +18,18 @@
 
 .up-btn {
   position: fixed;
-  bottom: 50px;
   right: 50px;
   background-color: rgba(255, 255, 255, 0.5);
   min-width: 100px;
   min-height: 100px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px; }
+  @media screen and (min-width: 1001px) {
+    .up-btn {
+      bottom: 50px; } }
+  @media screen and (max-width: 1000px) {
+    .up-btn {
+      bottom: 150px; } }
   .up-btn img {
     opacity: 0.3; }
 
@@ -584,5 +589,54 @@ body {
 
 .note {
   font-size: 14px !important; }
+
+.mobile-user-panel {
+  position: fixed;
+  height: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 40px;
+  background-color: #0367A6;
+  color: #fff;
+  opacity: 1; }
+  @media screen and (max-width: 1000px) {
+    .mobile-user-panel {
+      display: flex; } }
+  @media screen and (min-width: 1001px) {
+    .mobile-user-panel {
+      display: none !important; } }
+
+@media screen and (max-width: 1000px) {
+  .container {
+    max-width: 100% !important; } }
+
+@media screen and (max-width: 1000px) {
+  .main-review-form h2 {
+    font-size: 60px !important; }
+  .main-review-form h5, .main-review-form label {
+    font-size: 40px; }
+  .main-review-form input[type='text'] {
+    font-size: 40px; } }
+.exit {
+  fill: #fff;
+  position: absolute;
+  right: 10px;
+  max-width: 60px;
+  margin-top: 20px;
+  stroke: #fff;
+  margin-right: 30px; }
+  .exit * {
+    fill: #fff; }
+
+.main-review-form-container {
+  min-height: 2000px; }
+
+@media screen and (min-width: 1001px) {
+  .photo-form-group {
+    height: 100px; } }
+@media screen and (max-width: 1000px) {
+  .photo-form-group {
+    height: 160px; } }
 
 /*# sourceMappingURL=main.css.map */

@@ -183,16 +183,16 @@ form.component('new-review-form', {
             });
         }
     },
-    template: "<form style='max-width: 800px; margin-left: auto; margin-right: auto; position: relative;'>" +
+    template: "<form class='main-review-form' style='max-width: 800px; margin-left: auto; margin-right: auto; position: relative;'>" +
         "  <div class=\"row d-flex justify-content-center py-5\"><h2>Добавление нового сайта</h2></div>" +
         "  <div class=\"form-group\">" +
         "    <label v-if=\"!errors.emptyMain\" for=\"urlpath\">Адрес сайта</label>" +
         "    <label v-if=\"errors.emptyMain\" style=\"color: red\" for=\"urlpath\">Адрес сайта не может быть пустым</label>" +
-        "    <input type=\"text\" id=\"urlpath\" name=\"urlpath\" v-model=\"mainurl\" value=\"\" class=\"form-control col-6\" :class=\"{'alert-state': errors.emptyMain}\" placeholder=\"www.url.ru\">" +
+        "    <input type=\"text\" id=\"urlpath\" name=\"urlpath\" v-model=\"mainurl\" value=\"\" class=\"form-control col-lg-6 col-md-12\" :class=\"{'alert-state': errors.emptyMain}\" placeholder=\"www.url.ru\">" +
         "  </div>" +
         "  <hr class=\"divider\"/>" +
         "  <h5 for=\"photos\">Фотографии сайта</h5>" +
-        "  <div id=\"photoBtn\" class=\"form-group row py-3\" style=\"height: 100px;\">" +
+        "  <div id=\"photoBtn\" class=\"form-group row py-3 photo-form-group\">" +
         "   <h3 v-if=\"errors.emptyImages\" class=\"alert\">Сайт не может быть создан без фотографий</h3>" +
         "    <div v-on:click='openFileManager()' class=\"append-image-btn\" style=\"position: absolute; left: 1.5%;\" title=\"Фотографии сайта\">" +
         "      <svg width=\"78\" height=\"78\" viewBox=\"0 0 78 78\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">" +
@@ -228,7 +228,7 @@ form.component('new-review-form', {
         "  <div class=\"form-group pt-4\">" +
         "    <label v-if='!errors.emptyReviewHeader' for=\"review-header\">Заголовок отзыва</label>" +
         "    <label v-if='errors.emptyReviewHeader' for=\"review-header\" style='color: red'>Заголовок отзыва не может быть пустым</label>" +
-        "    <input type=\"text\" id=\"review-header\" name=\"review-header\" value=\"\" :class=\"{'alert-state': errors.emptyReviewHeader}\" class=\"form-control col-6\" placeholder=\"Заголовок\" v-model='reviewheader'>" +
+        "    <input type=\"text\" id=\"review-header\" name=\"review-header\" value=\"\" :class=\"{'alert-state': errors.emptyReviewHeader}\" class=\"form-control col-lg-6 col-md-12\" placeholder=\"Заголовок\" v-model='reviewheader'>" +
         "  </div>" +
         "  <div class=\"form-group pt-3\">" +
         "    <label v-if='!errors.emptyContent'  for=\"content\">Текст отзыва</label>" +

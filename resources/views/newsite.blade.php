@@ -8,7 +8,7 @@
             color: #0367A6;
         }
     </style>
-    <main class="container">
+    <main class="container main-review-form-container">
         <new-review-form></new-review-form>
     </main>
 @endsection
