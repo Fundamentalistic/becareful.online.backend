@@ -60,9 +60,11 @@ class SiteController extends Controller
             'reviews.content',
             'reviews.rating',
             'reviews.status',
+            'reviews.screenshots as photos',
             'users.name AS name',
         ];
         $data['reviews'] = Review::select($selected)->where('site_id', $site_id)
+            ->orderBy('id', 'DESC')
             ->leftJoin("users", "reviews.user_id", "=", "users.id")
             ->get();
         if ($data['reviews'] !== null){
@@ -80,6 +82,7 @@ class SiteController extends Controller
             $review['created_at'] = $completeDate;
             $commonrating += $review['rating'];
             $ratingCounter += 1;
+            $review['photos'] = explode(', ', $review['photos']);
         }
 
         $commonrating = round($commonrating / $ratingCounter);
@@ -115,7 +118,7 @@ class SiteController extends Controller
         }
 
         $screenshots_links = implode(", ", $screenshot_links);
-        $data['screenshots'] = $screenshot_links;
+        $data['screenshots'] = $screenshots_links;
 
         $review->fill($data);
         $review->save();

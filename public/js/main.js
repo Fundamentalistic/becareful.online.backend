@@ -10,6 +10,12 @@ var main = Vue.createApp({
         this.upBtn.background.style.opacity = 0.0;
         this.upBtn.background.addEventListener('mouseover', this.highlightMouse);
         this.upBtn.background.addEventListener('mouseout', this.highlightOff);
+        let authorizedInput = document.querySelector('#authorizedField');
+        if(authorizedInput !== null){
+            this.authorized = authorizedInput.value;
+        }
+        console.log(this.authorized);
+
 	},
 	data(){
 		return {
@@ -20,6 +26,9 @@ var main = Vue.createApp({
             mouseOnUpBtn: false,
             lastScrollPosition: 0,
             savedScrollPosition: 0,
+            authorized: undefined,
+            result_text: `  <div class="row d-flex justify-content-center>" style="margin-top: 30%!important"><h1>Спасибо за Ваш отзыв!</h1></div>
+                            <div class="row d-flex justify-content-center>"><p style="margin-left: 30px">Он появится на этой странице после модерации</p></div>`,
             errors: {
                 emptyMain: false,
                 emptyImages: false,
@@ -82,10 +91,14 @@ var main = Vue.createApp({
         openFileManager: function(){
             document.querySelector('#hidedFileInput').click();
         },
-        showPhoto: function(el){
+        showPhoto: function(el, link){
             console.log(el);
             document.querySelector('.background-plane').style.display = "block";
-            document.querySelector('.sliderComponent').src = this.images[el];
+            if(el){
+                document.querySelector('.sliderComponent').src = this.images[el];
+            }else{
+                document.querySelector('.sliderComponent').src = link;
+            }
             document.querySelector('.sliderComponent').style.display = "block";
         },
         hideSlider: function(){
@@ -93,10 +106,13 @@ var main = Vue.createApp({
             document.querySelector('.sliderComponent').src = '';
             document.querySelector('.sliderComponent').style.display = "none";
         },
-		openShortReviewForm: () => {
-			console.log('shortReviewForm is open');
-			let form = document.querySelector('#shortReviewForm');
-			form.style.display = "block";
+		openShortReviewForm: function(){
+			if(this.authorized){
+                let form = document.querySelector('#shortReviewForm');
+                form.style.display = "block";
+            }else{
+			   window.location = "/login";
+            }
 		},
 		hideShortReviewForm: () => {
 			let form = document.querySelector('#shortReviewForm');
@@ -156,7 +172,7 @@ var main = Vue.createApp({
                 console.log(result);
                 document.querySelector('div.reviewPane').innerHTML = self.result_text;
                 setTimeout(() => {
-                    window.location.reload();
+                   window.location.reload();
                 }, 2000);
             }).catch(function(error){
                 console.log("ERROR");
@@ -166,6 +182,7 @@ var main = Vue.createApp({
 	}
 
 });
+
 main.component('rating', {
     props: [
         'rating',
@@ -224,4 +241,71 @@ main.component('rating', {
     }
 });
 
+main.component('review-photo-slider', {
+    props: [
+        'links'
+    ],
+    data: function(){
+        return {
+            photos: undefined,
+        }
+    },
+    methods: {
+        showScreenshot: function(link){
+            console.log(link);
+            document.querySelector('.background-plane').style.display = "block";
+            document.querySelector('.sliderComponent').style.display = "block";
+            document.querySelector('.sliderComponent').src = link;
+            sliderLinks = this.photos;
+            currentIndex = this.photos.indexOf(link);
+        },
+
+        hideScreenshot: function(){
+            document.querySelector('.background-plane').style.display = "none";
+            document.querySelector('.sliderComponent').src = '';
+            document.querySelector('.sliderComponent').style.display = "none";
+        }
+    },
+    mounted: function(){
+        let rawPhotoLinks = JSON.parse(this.links);
+        this.photos = [];
+        for( photo of rawPhotoLinks){
+            console.log(photo.length);
+            if(photo.length > 0){
+                this.photos.push(photo);
+            }
+        }
+        console.log(this.photos);
+    },
+    template: `
+        <div class="photo-line">
+        <div class="row d-flex justify-content-start" style="min-height: 80px">
+            <div class='row images d-flex justify-content-start' style='margin-left: 20px; margin-top: 20px; min-width: 80%; overflow: hidden'>
+                <img class='img-thumbnail align-left' style='max-height: 300px;' v-for="photo in photos" v-bind:src='photo' v-on:click="showScreenshot(photo)"/>
+            </div>
+        </div>
+        </div>
+    `
+})
+
 main.mount('main');
+
+let sliderLinks = [];
+let currentIndex = 0;
+
+let showScreenshot = function(link){
+    console.log(link);
+    document.querySelector('.background-plane').style.display = "block";
+    document.querySelector('.sliderComponent').style.display = "block";
+    document.querySelector('.sliderComponent').src = link;
+};
+let hideScreenshot = function(){
+    document.querySelector('.background-plane').style.display = "none";
+    document.querySelector('.sliderComponent').src = '';
+    document.querySelector('.sliderComponent').style.display = "none";
+};
+
+let nextPhoto = function(){
+    currentIndex = (currentIndex + 1) % sliderLinks.length;
+    document.querySelector('.sliderComponent').src = sliderLinks[currentIndex];
+}

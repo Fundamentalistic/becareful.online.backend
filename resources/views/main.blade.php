@@ -80,6 +80,18 @@
                 <div class="review-content">
                     {{$review['content']}}
                 </div>
+                <review-photo-slider links="{{ json_encode($review['photos']) }}"></review-photo-slider>
+{{--                <div class="photo-line">--}}
+{{--                    <div class="row d-flex justify-content-start" style="min-height: 80px">--}}
+{{--                        <div class='row images d-flex justify-content-start' style='margin-left: 20px; margin-top: 20px; min-width: 80%; overflow: hidden'>--}}
+{{--                                @foreach($review['photos'] as $photo)--}}
+{{--                                    @if($photo)--}}
+{{--                                        <img class='img-thumbnail align-left' style='max-height: 300px;' src='{!! $photo !!}' onclick="showScreenshot('{!! $photo !!}')"/>--}}
+{{--                                    @endif--}}
+{{--                                @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="date">{{$review['created_at']}}</div>
             </div>
         @endforeach
@@ -92,21 +104,21 @@
             <div class="row d-flex justify-content-center mt-5">
                 <h3>Оставить отзыв</h3>
             </div>
-            <div class="row d-flex justify-content-start mt-5">
+            <div class="row d-flex justify-content-start">
                 <rating v-on:updateRating="updateFastRating" class="col-12" description="Оценка" rating="0" style="margin-top: 0!important;"></rating>
             </div>
-            <div class="row d-flex justify-content-center mt-5">
+            <div class="row d-flex justify-content-center">
                 <input class="col-12 review-form-header" v-model="header" :class="{ 'alert-state': errors.emptyReviewHeader }" name="header" type="text" placeholder="Заголовок"/>
             </div>
             <div class="row d-flex justify-content-center mt-5">
                 <textarea v-model="content" class="col-12 review-form-content" :class="{ 'alert-state': errors.emptyContent }" name="content"></textarea>
             </div>
-            <div class="row d-flex justify-content-start mt-5" style="min-height: 80px">
+            <div class="row d-flex justify-content-start" style="min-height: 80px">
                 <div class='row images d-flex justify-content-start' style='margin-left: 120px; max-height: 80px; min-width: 80%; overflow: hidden'>
                     <img class='img-thumbnail align-left' style='max-height: 75px; max-width: 75px' v-for='(image, index) in images' v-bind:src='image' v-on:click='showPhoto(index)'/>
                 </div>
             </div>
-            <div class="row d-flex justify-content-around mt-5">
+            <div class="row d-flex justify-content-around">
                 <div v-on:click='openFileManager()' class="append-image-btn" style="margin-top: -20px;" title="Фотографии сайта">
                     <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d)">
@@ -139,6 +151,9 @@
     <div class="up-btn" :class='{"highlighted": mouseOnUpBtn}'>
         <img :class='{"rotate-180": back, "highlighted": mouseOnUpBtn}' class="up-img" src="/imgs/up.png" v-on:click="upOrBack"/>
     </div>
+    <div class='background-plane' id='photoSlider' v-on:click='hideSlider()'></div>
+    <img src='' class='sliderComponent' onclick="nextPhoto()" />
+    <input type="hidden" value="" id="sliderLinks">
 </main>
 @endsection
 @section('scripts')

@@ -164,7 +164,7 @@ reviews.component('short-review', {
         "                </div>" +
         "            </div>" +
         "" +
-        "            <div class=\"content col-9 m-1\">{{content}}" +
+        "            <div class=\"content col-8 m-1\">{{content}}" +
         "                <div class=\"white-block\"></div>" +
         "                <div class=\"user-data row\">" +
         "                    <div class=\"username\">{{username}}</div>" +
