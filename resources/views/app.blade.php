@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/sass/main.css">
     <title>BECAREFUL.ONLINE сайт отзывов обо всем, что есть в интернете</title>
+    <meta name="description" content="Задачей сайта becareful.online является предотврашение любых возможностей мошенничества, доведение информации до посетителей о возможных вариантах обмана в интернете и предоставление инструментов, позволяющих на 100% обезопасить сделки">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
