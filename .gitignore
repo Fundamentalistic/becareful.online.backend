@@ -20,3 +20,6 @@ becareful.sql
 access.log
 .styleci.yml
 .editorconfig
+public/.idea/
+public/sass/.sass-cache/
+error.log
