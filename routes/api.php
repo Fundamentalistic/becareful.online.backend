@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('search/words', function(){
+    return response(file_get_contents('../words.json'))
+        ->withHeaders([
+            "Content-Type", "application/json",
+            "Access-Control-Allow-Origin", "*"
+        ]);
+});
