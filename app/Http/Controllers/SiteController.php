@@ -167,7 +167,7 @@ class SiteController extends Controller
         $sp = explode(".", $main_image_path);
         $extension = end($sp);
         $destination_img = str_replace($extension, "compress.".$extension, $main_image_path);
-        $this->compress(Storage::path($main_image_path), Storage::path($destination_img), 5);
+        $this->compress(Storage::path($main_image_path), Storage::path($destination_img), 10);
 
         $percent = 0.01;
         list($width, $height) = getimagesize(Storage::path($main_image_path));
@@ -212,6 +212,87 @@ class SiteController extends Controller
             throw new InvalidArgumentException("Unknown mime type in compress method");
         }
         imagejpeg($image, $destination, $quality);
+    }
+
+    public function loadFromCollector(Request $request){
+
+        // Получение идентификатора пользователя
+        $user_id = 1;
+
+        // Заполнение модели сайта
+        $site = new Site;
+        $data = $request->toArray();
+
+        // Проверка на то, что сайт с данным url не существует в нашей базе
+        $sp = explode("www.", $data['url']);
+        if($sp[0] === "") {
+            $testUrl = strtolower($sp[1]);
+        }else{
+            $testUrl = strtolower($sp[0]);
+        }
+        $sites = Site::where("url", "=", $testUrl)->get();
+        if($sites->count() > 0){
+            return response("Site already exists", 403);
+        }
+
+        $data['user_id'] = $user_id;
+        $data['first_date'] = date('y-m-d');
+        $data['hash'] =  substr(sha1(rand()), 0, 64);
+        $data['mark'] = "neutral";
+
+        $data['site_id'] = $this->getNextId();
+
+        $screenshot_links = [];
+        $main_image_path = "";
+        foreach($data['images'] as $key => $image){
+            $sp = explode(";base64,", $image);
+            $type = explode(":image/", $sp[0])[1];
+            $base64content = $sp[1];
+            $filename = substr(sha1(rand()), 0, 12);
+            $image_byte_array = base64_decode($base64content);
+            $filePath = "public/screenshots/" . $data['site_id'] . "/" . $filename . "." . $type;
+            Storage::put($filePath, $image_byte_array);
+            $url = Storage::url($filePath);
+            if($key === 0){
+                $main_image_path = $filePath;
+            }
+            array_push($screenshot_links, $url);
+        }
+
+        // Выполняем сжатие первого изображения для быстрого отображения сайта в новых отзывах
+
+        $sp = explode(".", $main_image_path);
+        $extension = end($sp);
+        $destination_img = str_replace($extension, "compress.".$extension, $main_image_path);
+        $this->compress(Storage::path($main_image_path), Storage::path($destination_img), 80);
+
+        $percent = 0.10;
+        list($width, $height) = getimagesize(Storage::path($main_image_path));
+        $newwidth = $width * $percent;
+        $newheight = $height * $percent;
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+        $source = imagecreatefromjpeg(Storage::path($destination_img));
+
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+        imagejpeg($thumb, Storage::path($destination_img));
+
+        $data['main_page'] = Storage::url($destination_img);
+
+        // Завершение сжатия изображение присваиванием значения переменной main_page
+
+        $site->fill($data);
+        $site->save();
+
+        $screenshots = new Screenshot;
+        $screenshots->site_id = $site->id;
+        $screenshots->links = implode(", ", $screenshot_links); // Переделать на формирование ссылок
+        $screenshots->save();
+
+        unset($data['images']);
+
+        $review = new Review;
+        $review->fill($data);
+        $review->save();
     }
 }
 

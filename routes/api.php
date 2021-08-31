@@ -25,3 +25,5 @@ Route::get('search/words', function(){
             "Access-Control-Allow-Origin", "*"
         ]);
 });
+
+Route::post('load', [\App\Http\Controllers\SiteController::class, "loadFromCollector"]);

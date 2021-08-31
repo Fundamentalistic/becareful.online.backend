@@ -11,7 +11,7 @@
 
 <main class="main-border container-fluid">
     <div class="main-container" v-bind:class="{'container-fluid': isMobile, 'container': !isMobile}">
-    <div class="row"><h1 class="col-2" style="padding-left: 2rem !important; padding-top: 1.9rem !important;"><a href="#" title="Перейти на сайт">{{$url}}</a></h1><div class="col-9 d-flex justify-content-end main-rating"><rating rating='{{$commonrating}}' description='' editable="false"></rating></div></div>
+    <div class="row"><h1 class="col-4" style="padding-left: 2rem !important; padding-top: 1.9rem !important;"><a href="https://{{$url}}" title="Перейти на сайт">{{$url}}</a></h1><div class="col-7 d-flex justify-content-end main-rating"><rating rating='{{$commonrating}}' description='' editable="false"></rating></div></div>
     <hr class="divider"/>
     <div class="row">
         <div class="col-md-1"></div>

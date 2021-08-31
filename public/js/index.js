@@ -24,6 +24,9 @@ var reviews = Vue.createApp({
             this.mouseOnUpBtn = false;
         },
         saveScrollPosition(){
+            if(!this.back){
+                this.back = false;
+            }
             this.lastScrollPosition = window.scrollY;
             if(this.lastScrollPosition === 0 && !this.savedScrollPosition){
                 this.upBtn.png.style.opacity = 0.0;
